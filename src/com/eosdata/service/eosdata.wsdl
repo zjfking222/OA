@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SupplierSave">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlData" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SupplierSaveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SupplierSaveResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SupplierDelete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlData" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SupplierDeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SupplierDeleteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MaterielSave">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlData" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MaterielSaveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MaterielSaveResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MaterielDelete">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="xmlData" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="MaterielDeleteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="MaterielDeleteResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="SupplierSaveSoapIn">
+    <wsdl:part name="parameters" element="tns:SupplierSave" />
+  </wsdl:message>
+  <wsdl:message name="SupplierSaveSoapOut">
+    <wsdl:part name="parameters" element="tns:SupplierSaveResponse" />
+  </wsdl:message>
+  <wsdl:message name="SupplierDeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:SupplierDelete" />
+  </wsdl:message>
+  <wsdl:message name="SupplierDeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:SupplierDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="MaterielSaveSoapIn">
+    <wsdl:part name="parameters" element="tns:MaterielSave" />
+  </wsdl:message>
+  <wsdl:message name="MaterielSaveSoapOut">
+    <wsdl:part name="parameters" element="tns:MaterielSaveResponse" />
+  </wsdl:message>
+  <wsdl:message name="MaterielDeleteSoapIn">
+    <wsdl:part name="parameters" element="tns:MaterielDelete" />
+  </wsdl:message>
+  <wsdl:message name="MaterielDeleteSoapOut">
+    <wsdl:part name="parameters" element="tns:MaterielDeleteResponse" />
+  </wsdl:message>
+  <wsdl:portType name="EosDataSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SupplierSave">
+      <wsdl:input message="tns:SupplierSaveSoapIn" />
+      <wsdl:output message="tns:SupplierSaveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SupplierDelete">
+      <wsdl:input message="tns:SupplierDeleteSoapIn" />
+      <wsdl:output message="tns:SupplierDeleteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MaterielSave">
+      <wsdl:input message="tns:MaterielSaveSoapIn" />
+      <wsdl:output message="tns:MaterielSaveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="MaterielDelete">
+      <wsdl:input message="tns:MaterielDeleteSoapIn" />
+      <wsdl:output message="tns:MaterielDeleteSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="EosDataSoap" type="tns:EosDataSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SupplierSave">
+      <soap:operation soapAction="http://tempuri.org/SupplierSave" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SupplierDelete">
+      <soap:operation soapAction="http://tempuri.org/SupplierDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MaterielSave">
+      <soap:operation soapAction="http://tempuri.org/MaterielSave" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MaterielDelete">
+      <soap:operation soapAction="http://tempuri.org/MaterielDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="EosDataSoap12" type="tns:EosDataSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SupplierSave">
+      <soap12:operation soapAction="http://tempuri.org/SupplierSave" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SupplierDelete">
+      <soap12:operation soapAction="http://tempuri.org/SupplierDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MaterielSave">
+      <soap12:operation soapAction="http://tempuri.org/MaterielSave" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MaterielDelete">
+      <soap12:operation soapAction="http://tempuri.org/MaterielDelete" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="EosData">
+    <wsdl:port name="EosDataSoap" binding="tns:EosDataSoap">
+      <soap:address location="http://122.225.91.27/HuayouEosDataWebService/eosdata.asmx" />
+    </wsdl:port>
+    <wsdl:port name="EosDataSoap12" binding="tns:EosDataSoap12">
+      <soap12:address location="http://122.225.91.27/HuayouEosDataWebService/eosdata.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
