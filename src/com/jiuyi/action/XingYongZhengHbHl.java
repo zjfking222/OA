@@ -49,16 +49,16 @@ public class XingYongZhengHbHl implements Action {
 		new BaseBean().writeLog("kzzje--=="+kzzje);
 		new BaseBean().writeLog("hl--=="+hl);
 		
-		if(hub.equals("USD")){
-			kzzje = kzzjeusd;
-		}else if(hub.equals("CNY")||hub.equals("RMB")){
-			kzzje = zjermb;
-			hl = huil;
-		}else if(hub.equals("EUR")){
+		if(hub.equals("USD")){//如果外证货币为USD
+			kzzje = kzzjeusd; //非表单字段开证总金额=开证总金额（USD）
+		}else if(hub.equals("CNY")||hub.equals("RMB")){//否则外币为CNY或RMB时
+			kzzje = zjermb;//非表单字段开证总金额=开证总金额（RMB）
+			hl = huil;//非表单字段汇率=人民币汇率
+		}else if(hub.equals("EUR")){ //否则外币为EUR时
 			kzzje = kzzjeEUR;
 			hl = oyhl;
 		}
-		String sql1 = "update "+tablename+" set kzzje='"+kzzje+"' , hl='"+hl+"' where requestid="+requestid;
+		String sql1 = "update "+tablename+" set kzzje='"+kzzje+"' , hl='"+hl+"' where requestid="+requestid;//更新当前流程id表单内的开证总金额和汇率
 		new BaseBean().writeLog("sql1--=="+sql1);
 		rs1.executeSql(sql1);
 		

@@ -48,7 +48,7 @@ jQuery(document).ready(function(){
 	jQuery("#field"+nzhth).bindPropertyChange(function() {
 		getNzsl();
 	});
-	setInterval(function() {
+	setInterval(function() { //初始化
 		var mxNum_sum = 0;
 		//checkCustomize = function (){
 
@@ -81,7 +81,7 @@ jQuery(document).ready(function(){
 				jQuery("#field9264_" + i).val(gshj);
 				if (0 == jijia) {
 					if(0 != gshj){
-					    usd = mt*xishu*gshj;
+					    usd = mt*xishu*gshj;//货值USD=数量(kg)*系数*公式价
 					    kzhje1usd = kzhje1usd+usd;
 					    jQuery("#field9265_" + i).val(usd);
 					    jQuery("#field9266_" + i).val(usd*hl*rzxs);
@@ -110,13 +110,14 @@ jQuery(document).ready(function(){
 
 			jQuery("#field9439").val(kzhje1usd);
 			jQuery("#field9364").val(kzhje1usd*hl*rzxs);
+			var kzzjeUSD=jQuery("#field9439").val();
+			var kzzjeRMB=jQuery("#field9364").val();
+			var hydzzje=jQuery("#field13659").val();
 			var kzzjeEUR = jQuery("#field9439").val()/ jQuery("#field13657").val();
 			jQuery("#field13655").val(kzzjeEUR);
-			var ydzzje = (1+parseFloat(jQuery("#field13659").val()))*jQuery("#field9364").val();
+			var ydzzje=(trim(kzzjeRMB)==0?(1+parseFloat(hydzzje))*kzzjeUSD:(1+parseFloat(hydzzje))*kzzjeRMB);
 			jQuery("#field13661").val(ydzzje);
 		for (var j = 0; j < mxNum2; j++) {
-			var nzjslxvalue  = jQuery("#field"+nzjslx+"_" + j).val();//内证金属类型
-	       
 			var jijia2 = jQuery("#field9337_" + j).val();//判断计价方式
 			var mt2 = jQuery("#field9338_" + j).val();//获取mt
 			var xishu2 = jQuery("#field9339_" + j).val();//获取系数；
@@ -156,11 +157,14 @@ jQuery(document).ready(function(){
 			}
 		}
 
-		jQuery("#field9440").val(kzhje1usd2);
+		jQuery("#field9440").val(kzhje1usd2*rzxs2);
 		jQuery("#field9371").val(kzhje1usd2*hl2*rzxs2);
+		var kzzjeRMB2=jQuery("#field9371").val();
+        var kzzjeUSD2=jQuery("#field9440").val();
+        var hydzzje2=jQuery("#field13660").val();
 		var kzzjeEUR2 = jQuery("#field9440").val()/ jQuery("#field13658").val();
 		jQuery("#field13656").val(kzzjeEUR2);
-		var ydzzje2 = (1+parseFloat(jQuery("#field13660").val()))*jQuery("#field9371").val();
+		var ydzzje2 = (trim(kzzjeRMB2)==0?(1+parseFloat(hydzzje2))*kzzjeUSD2:(1+parseFloat(hydzzje2))*kzzjeRMB2);
 		jQuery("#field13662").val(ydzzje2);
 		
 		},1000);
@@ -169,8 +173,8 @@ jQuery(document).ready(function(){
 });
 
 function getWzsl(){
-	 var hth = jQuery("#field"+wzhth).val();
-	 var gongys = jQuery("#field"+wzgongys).val();
+	 var hth = jQuery("#field"+wzhth).val();//合同号=外证合同号
+	 var gongys = jQuery("#field"+wzgongys).val();//供应商=外证供应商
      if(hth==""){
      	return;
      }else{
@@ -182,25 +186,25 @@ function getWzsl(){
    	 		success:function(data){
    	 			eval("var obj="+data);
    	 			deleteRow(0);
-   	 			if(obj.co>0){
-					addRow0(0);
+   	 			if(obj.co>0){ //钴
+					addRow0(0);//加行
 					var rowindex = (jQuery('#indexnum0').val()-1);//行号
-					setFMVal(wzjslx+"_"+rowindex,"0");
+					setFMVal(wzjslx+"_"+rowindex,"0");//赋值
 					//setFMVal(wzsl+"_"+rowindex,obj.co);
    	 			}
-   	 			if(obj.cu>0){
+   	 			if(obj.cu>0){ //铜
 					addRow0(0);
                     var rowindex = (jQuery('#indexnum0').val()-1);//行号
 					setFMVal(wzjslx+"_"+rowindex,"1");
 					//setFMVal(wzsl+"_"+rowindex,obj.cu);
    	 			}
-   	 			if(obj.ge>0){
+   	 			if(obj.ge>0){//锗
    	 				addRow0(0);
                     var rowindex = (jQuery('#indexnum0').val()-1);//行号
 					setFMVal(wzjslx+"_"+rowindex,"2");
 					//setFMVal(wzsl+"_"+rowindex,obj.ge);
    	 			}
-   	 			if(obj.ni>0){
+   	 			if(obj.ni>0){ //镍
    	 				addRow0(0);
                     var rowindex = (jQuery('#indexnum0').val()-1);//行号
 					setFMVal(wzjslx+"_"+rowindex,"3");
