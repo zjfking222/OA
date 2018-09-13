@@ -44,7 +44,7 @@ public class SaleAndDelivery {
 	            	 info.setIsNextFlow("1");// 是否提交到下一节点 1提交到下一节点 0停留在创建节点
 	             }
 	             MainTableInfo mti = new MainTableInfo();
-	             Property[] p = new Property[38];
+	             Property[] p = new Property[44];
 	             
 	             p[0] = new Property();//公司代码
 	             p[0].setName("BURKS");
@@ -205,13 +205,48 @@ public class SaleAndDelivery {
 	             
 	             
 	             String sql = "select departmentid from hrmresource where loginid='"+loginid+"'";
-	             rs.executeSql(sql);
+	             rs.execute(sql);
 	             rs.next();
 	             String departmentid = rs.getString(1);
 	             new BaseBean().writeLog("departmentid=="+departmentid);
 	             p[37] = new Property();//申请人部门
 	             p[37].setName("shenbm");
 	             p[37].setValue(departmentid);
+
+				 p[38] = new Property();//客户简称
+				 p[38].setName("SORT1");
+				 p[38].setValue(Util.null2String(sm.getSORT1()));
+
+				 p[39] = new Property();//备用1
+				 p[39].setName("ZTDBY1");
+
+//				 p[39].setValue(Util.null2String(JiuyiUtil.getQfw(Double.parseDouble(sm.getZTDBY1()))));
+				 p[39].setValue("0.0");
+
+				 p[40] = new Property();//备用2
+				 p[40].setName("ZTDBY2");
+//				 p[40].setValue(Util.null2String(JiuyiUtil.getQfw(Double.parseDouble(sm.getZTDBY2()))));
+
+				 p[40].setValue("0.0");
+
+				 p[41] = new Property();//备用3
+				 p[41].setName("ZTDBY3");
+//				 p[41].setValue(Util.null2String(JiuyiUtil.getQfw(Double.parseDouble(sm.getZTDBY3()))));
+
+				 p[41].setValue("0.0");
+
+				 p[42] = new Property();//备用4
+				 p[42].setName("ZTDBY4");
+//				 p[42].setValue(Util.null2String(JiuyiUtil.getQfw(Double.parseDouble(sm.getZTDBY4()))));
+
+				 p[42].setValue("0.0");
+
+				 p[43] = new Property();//备用5
+				 p[43].setName("ZTDBY5");
+//				 p[43].setValue(Util.null2String(JiuyiUtil.getQfw(Double.parseDouble(sm.getZTDBY5()))));
+
+				 p[43].setValue("0.0");
+
 	             
 	             
 	             mti.setProperty(p);

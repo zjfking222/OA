@@ -38,6 +38,14 @@ public class InsertSellMXSql {
 			String BB;//币别
 			String YLZD1;//预留字段1
 			String YLZD2;//预留字段2
+			String ZYKPSL;//已申请开票数量
+			String ZWKPSL;//未申请开票数量
+			String SORT1;//客户简称
+			String ZHXMBY1;//行项目备用
+			String ZHXMBY2;//行项目备用
+			String ZHXMBY3;//行项目备用
+			String ZHXMBY4;//行项目备用
+			String ZHXMBY5;//行项目备用
 			if(rs.next()){
 				String mainid = rs.getString("id");
 				for (int i =0 ;i<sp.length;i++){
@@ -58,10 +66,18 @@ public class InsertSellMXSql {
 					BB= Util.null2String(sp[i].getBB());//币别
 					YLZD1 = Util.null2String(sp[i].getYLZD1());//保险费
 					YLZD2 = Util.null2String(sp[i].getYLZD2());//汇率
+					ZYKPSL=Util.null2String(sp[i].getZYKPSL());//已申请开票数量
+					ZWKPSL=Util.null2String(sp[i].getZWKPSL());//未申请开票数量
+
+					ZHXMBY1=Util.null2String(sp[i].getZHXMBY1());//行项目备用
+					ZHXMBY2=Util.null2String(sp[i].getZHXMBY2());//行项目备用
+					ZHXMBY3=Util.null2String(sp[i].getZHXMBY3());//行项目备用
+					ZHXMBY4=Util.null2String(sp[i].getZHXMBY4());//行项目备用
+					ZHXMBY5=Util.null2String(sp[i].getZHXMBY5());//行项目备用
 					sql = "insert into " + tablename + "_dt1 " +
-							"(mainid,POSNR,MATNR,MAKTX,MEINS,GROES,ZDWMS,FKIMG,NETWR,ZZSSL,MWSBP,BHSDJ,HSDJ,AMOUNT,ZYBF,BB,YLZD1,YLZD2) " +
+							"(mainid,POSNR,MATNR,MAKTX,MEINS,GROES,ZDWMS,FKIMG,NETWR,ZZSSL,MWSBP,BHSDJ,HSDJ,AMOUNT,ZYBF,BB,YLZD1,YLZD2,ZHXMBY1,ZHXMBY2,ZHXMBY3,ZHXMBY4,ZHXMBY5,ZYKPSL,ZWKPSL) " +
 							"values ('"+mainid+"','"+POSNR+"','"+MATNR+"','"+MAKTX+"','"+MEINS+"','"+GROES+"','"+ZDWMS+"','"+JiuyiUtil.getQfw(Double.parseDouble(FKIMG))+"'" +
-									",'"+JiuyiUtil.getQfw(Double.parseDouble(NETWR))+"','"+ZZSSL+"','"+JiuyiUtil.getQfw(Double.parseDouble(MWSBP))+"','"+BHSDJ+"','"+HSDJ+"','"+JiuyiUtil.getQfw(Double.parseDouble(AMOUNT))+"','"+ZYBF+"','"+BB+"','"+YLZD1+"','"+YLZD2+"')";
+									",'"+JiuyiUtil.getQfw(Double.parseDouble(NETWR))+"','"+ZZSSL+"','"+JiuyiUtil.getQfw(Double.parseDouble(MWSBP))+"','"+BHSDJ+"','"+HSDJ+"','"+JiuyiUtil.getQfw(Double.parseDouble(AMOUNT))+"','"+ZYBF+"','"+BB+"','"+YLZD1+"','"+YLZD2+"','"+ZHXMBY1+"','"+ZHXMBY2+"','"+ZHXMBY3+"','"+ZHXMBY4+"','"+ZHXMBY5+"','"+ZYKPSL+"','"+ZWKPSL+"')";
 					new BaseBean().writeLog("插入明细sql:"+sql);
 					rs.execute(sql);
 				}

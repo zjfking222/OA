@@ -24,6 +24,13 @@ public class SellParticulars {
 	private String YLZD2;//预留字段2
 	private String YLZD3;//预留字段3
 	private String YLZD4;//预留字段4
+	private String ZYKPSL;//已申请开票数量
+	private String ZWKPSL;//未申请开票数量
+	private String ZHXMBY1;//行项目备用1
+	private String ZHXMBY2;
+	private String ZHXMBY3;
+	private String ZHXMBY4;
+	private String ZHXMBY5;
 	
 	public String getPOSNR() {
 		return POSNR;
@@ -140,6 +147,59 @@ public class SellParticulars {
 		YLZD4 = yLZD4;
 	}
 
+	public String getZHXMBY1() {
+		return ZHXMBY1;
+	}
 
-	
+	public void setZHXMBY1(String ZHXMBY1) {
+		this.ZHXMBY1 = ZHXMBY1;
+	}
+
+	public String getZHXMBY2() {
+		return ZHXMBY2;
+	}
+
+	public void setZHXMBY2(String ZHXMBY2) {
+		this.ZHXMBY2 = ZHXMBY2;
+	}
+
+	public String getZHXMBY3() {
+		return ZHXMBY3;
+	}
+
+	public void setZHXMBY3(String ZHXMBY3) {
+		this.ZHXMBY3 = ZHXMBY3;
+	}
+
+	public String getZHXMBY4() {
+		return ZHXMBY4;
+	}
+
+	public void setZHXMBY4(String ZHXMBY4) {
+		this.ZHXMBY4 = ZHXMBY4;
+	}
+
+	public String getZHXMBY5() {
+		return ZHXMBY5;
+	}
+
+	public void setZHXMBY5(String ZHXMBY5) {
+		this.ZHXMBY5 = ZHXMBY5;
+	}
+
+	public String getZYKPSL() {
+		return ZYKPSL;
+	}
+
+	public void setZYKPSL(String ZYKPSL) {
+		this.ZYKPSL = ZYKPSL;
+	}
+
+	public String getZWKPSL() {
+		return ZWKPSL;
+	}
+
+	public void setZWKPSL(String ZWKPSL) {
+		this.ZWKPSL = ZWKPSL;
+	}
 }

@@ -33,6 +33,12 @@ public class InsertSaleAndDeliveryMXSql {
 			String LGORT;//        发货仓库
 			String ZFHCKMS;//      仓库名称
 			String BB;//      币别
+			String  ZHXMBY1;
+			String  ZHXMBY2;
+			String  ZHXMBY3;
+			String  ZHXMBY4;
+			String  ZHXMBY5;
+
 			
 			if(rs.next()){
 				String mainid = rs.getString("id");
@@ -52,11 +58,16 @@ public class InsertSaleAndDeliveryMXSql {
 					ZFHGCMS = Util.null2String(sp[i].getZFHGCMS());     
 					LGORT = Util.null2String(sp[i].getLGORT());
 					ZFHCKMS = Util.null2String(sp[i].getZFHCKMS()); 
-					BB = Util.null2String(sp[i].getBB());    
+					BB = Util.null2String(sp[i].getBB());
+					ZHXMBY1=Util.null2String(sp[i].getZHXMBY1());
+					ZHXMBY2=Util.null2String(sp[i].getZHXMBY2());
+					ZHXMBY3=Util.null2String(sp[i].getZHXMBY3());
+					ZHXMBY4=Util.null2String(sp[i].getZHXMBY4());
+					ZHXMBY5=Util.null2String(sp[i].getZHXMBY5());
 					sql = "insert into " + tablename + "_dt1 " +
-							"(mainid,POSNR,MATNR,MAKTX,MEINS,KWMENG,LFIMG,PRICE,AMOUNT,MATKL,ZVTEXT,ZCOMMENT2,WERKS,ZFHGCMS,LGORT,ZFHCKMS,BB) " +
+							"(mainid,POSNR,MATNR,MAKTX,MEINS,KWMENG,LFIMG,PRICE,AMOUNT,MATKL,ZVTEXT,ZCOMMENT2,WERKS,ZFHGCMS,LGORT,ZFHCKMS,BB,ZHXMBY1,ZHXMBY2,ZHXMBY3,ZHXMBY4,ZHXMBY5) " +//,'"+ZHXMBY1+"','"+ZHXMBY2+"','"+ZHXMBY3+"','"+ZHXMBY4+"','"+ZHXMBY5+"'
 							"values ('"+mainid+"','"+POSNR+"','"+MATNR+"','"+MAKTX+"','"+MEINS+"','"+KWMENG+"','"+JiuyiUtil.getQfw(Double.parseDouble(LFIMG))+"','"+PRICE+"'" +
-									",'"+JiuyiUtil.getQfw(Double.parseDouble(AMOUNT))+"','"+MATKL+"','"+ZVTEXT+"','"+ZCOMMENT2+"','"+WERKS+"','"+ZFHGCMS+"','"+LGORT+"','"+ZFHCKMS+"','"+BB+"')";
+									",'"+JiuyiUtil.getQfw(Double.parseDouble(AMOUNT))+"','"+MATKL+"','"+ZVTEXT+"','"+ZCOMMENT2+"','"+WERKS+"','"+ZFHGCMS+"','"+LGORT+"','"+ZFHCKMS+"','"+BB+"','"+0.0+"','"+0.0+"','"+0.0+"','"+0.0+"','"+0.0+"')";
 					new BaseBean().writeLog("插入明细sql:"+sql);
 					rs.execute(sql);
 				}

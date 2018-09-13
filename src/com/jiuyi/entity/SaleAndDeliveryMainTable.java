@@ -40,6 +40,14 @@ public class SaleAndDeliveryMainTable {
 	private String 	ZYFHL;
 	private String 	ZHTYL;
 	private String sher;
+	private String SORT1;
+	private String ZTDBY1;
+	private String ZTDBY2;
+	private String ZTDBY3;
+	private String ZTDBY4;
+	private String ZTDBY5;
+
+
 	
 	public String getSher() {
 		return sher;
@@ -251,6 +259,53 @@ public class SaleAndDeliveryMainTable {
 	public void setZHTYL(String zHTYL) {
 		ZHTYL = zHTYL;
 	}
-	
-	
+
+	public String getSORT1() {
+		return SORT1;
+	}
+
+	public void setSORT1(String SORT1) {
+		this.SORT1 = SORT1;
+	}
+
+
+	public String getZTDBY1() {
+		return ZTDBY1;
+	}
+
+	public void setZTDBY1(String ZTDBY1) {
+		this.ZTDBY1 = ZTDBY1;
+	}
+
+	public String getZTDBY2() {
+		return ZTDBY2;
+	}
+
+	public void setZTDBY2(String ZTDBY2) {
+		this.ZTDBY2 = ZTDBY2;
+	}
+
+	public String getZTDBY3() {
+		return ZTDBY3;
+	}
+
+	public void setZTDBY3(String ZTDBY3) {
+		this.ZTDBY3 = ZTDBY3;
+	}
+
+	public String getZTDBY4() {
+		return ZTDBY4;
+	}
+
+	public void setZTDBY4(String ZTDBY4) {
+		this.ZTDBY4 = ZTDBY4;
+	}
+
+	public String getZTDBY5() {
+		return ZTDBY5;
+	}
+
+	public void setZTDBY5(String ZTDBY5) {
+		this.ZTDBY5 = ZTDBY5;
+	}
 }

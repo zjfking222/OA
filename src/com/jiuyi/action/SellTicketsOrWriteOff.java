@@ -54,7 +54,7 @@ public class SellTicketsOrWriteOff {
 	             }
 	             
 	             MainTableInfo mti = new MainTableInfo();
-	             Property[] p = new Property[31];
+	             Property[] p = new Property[44];
 	             
 	             p[0] = new Property();//公司代码
 	             p[0].setName("BURKS");
@@ -219,6 +219,38 @@ public class SellTicketsOrWriteOff {
 	             p[30] = new Property();//国际贸易条款1
 	             p[30].setName("YLZD4");
 	             p[30].setValue(Util.null2String(st.getYLZD4()));
+
+	             p[31] =new Property();//客户简称
+				 p[31].setName("SORT1");
+				 p[31].setValue(Util.null2String(st.getSORT1()));
+
+				 p[32] =new Property();//已申请开票数量
+				 p[32].setName("ZYKPSL");
+				 p[32].setValue(Util.null2String(st.getSORT1()));
+
+				 p[33] =new Property();//未申请开票数量
+				 p[33].setName("ZWKPSL");
+				 p[33].setValue(Util.null2String(st.getSORT1()));
+
+				 p[34] =new Property();//抬头备用1
+				 p[34].setName("ZTDBY1");
+				 p[34].setValue(Util.null2String(st.getSORT1()));
+
+				 p[35] =new Property();//抬头备用2
+				 p[35].setName("ZTDBY2");
+				 p[35].setValue(Util.null2String(st.getSORT1()));
+
+				 p[36] =new Property();//抬头备用3
+				 p[36].setName("ZTDBY3");
+				 p[36].setValue(Util.null2String(st.getSORT1()));
+
+				 p[37] =new Property();//抬头备用4
+				 p[37].setName("ZTDBY4");
+				 p[37].setValue(Util.null2String(st.getSORT1()));
+
+				 p[38] =new Property();//抬头备用5
+				 p[38].setName("ZTDBY5");
+				 p[38].setValue(Util.null2String(st.getSORT1()));
 	             
 	             
 	             

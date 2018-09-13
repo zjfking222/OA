@@ -21,6 +21,11 @@ public class SaleAndDeliveryParticulars {
 	private String 	LGORT;
 	private String 	ZFHCKMS;
 	private String 	BB;
+	private String  ZHXMBY1;
+	private String  ZHXMBY2;
+	private String  ZHXMBY3;
+	private String  ZHXMBY4;
+	private String  ZHXMBY5;
 	
 	
 	public String getPOSNR() {
@@ -119,6 +124,45 @@ public class SaleAndDeliveryParticulars {
 	public void setBB(String bB) {
 		BB = bB;
 	}
-	
-	
+
+	public String getZHXMBY1() {
+		return ZHXMBY1;
+	}
+
+	public void setZHXMBY1(String ZHXMBY1) {
+		this.ZHXMBY1 = ZHXMBY1;
+	}
+
+	public String getZHXMBY2() {
+		return ZHXMBY2;
+	}
+
+	public void setZHXMBY2(String ZHXMBY2) {
+		this.ZHXMBY2 = ZHXMBY2;
+	}
+
+	public String getZHXMBY3() {
+		return ZHXMBY3;
+	}
+
+	public void setZHXMBY3(String ZHXMBY3) {
+		this.ZHXMBY3 = ZHXMBY3;
+	}
+
+	public String getZHXMBY4() {
+		return ZHXMBY4;
+	}
+
+	public void setZHXMBY4(String ZHXMBY4) {
+		this.ZHXMBY4 = ZHXMBY4;
+	}
+
+	public String getZHXMBY5() {
+		return ZHXMBY5;
+	}
+
+	public void setZHXMBY5(String ZHXMBY5) {
+		this.ZHXMBY5 = ZHXMBY5;
+	}
+
 }
