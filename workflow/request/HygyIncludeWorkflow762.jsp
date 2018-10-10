@@ -16,10 +16,14 @@
         map = CommonUtil.getFieldId(formid, "0");//主表数据
         String lx = map.get("shengcwlkc");//类型
         String wllx = map.get("wllx");//物料类型
+        String zbgc = map.get("factory");//主表工厂
+        String scwl = map.get("shengcwlkc");//生产物料类型
+        String mxgcfz = map.get("mxgc");//明细工厂赋值
 //        map1=JiuyiUtil.getFieldId(formid,"1");//明细表数据
         map1 = CommonUtil.getFieldId(formid, "1");//明细1
         String gc = map1.get("werks");//工厂
-        String kcdd = map1.get("lgort");//库存地点
+        String lgort = map1.get("lgort");//库存地点
+        String kucun = map1.get("kucun");//非传输库存
 
 
 %>
@@ -30,12 +34,16 @@
 
     var wllx = '<%=wllx%>';//物料类型
     var lx = '<%=lx%>';//类型
+    var zbgc = '<%=zbgc%>';//主表工厂
+    var scwl = '<%=scwl%>';//生产物料类型
+    var mxgcfz = '<%=mxgcfz%>';//明细工厂赋值
 
     /*****************明细表********************/
 
     var gc = '<%=gc%>';//工厂
-    var kcdd = '<%=kcdd%>';//库存地点
-
+    var lgort = '<%=lgort%>';//库存地点
+    var kucun = "<%=kucun%>";
+    var flag = {};//标记：防止重复绑定事件
 
     setFMVal(wllx, "");
 
@@ -59,12 +67,83 @@
         setFMVal(wllx, wllxvalue);
 
     });
+    jQuery("#field" +<%=zbgc%>).bindPropertyChange(function () {//工厂改变
+        deleteRow(0);
+        jQuery("#field" + mxgcfz + "span").text("");
+        jQuery("#field" + mxgcfz).val("");
+    });
+    jQuery("#field" +<%=scwl%>).bindPropertyChange(function () {//物料类型改变
+        deleteRow(0);
+        jQuery("#field" + mxgcfz + "span").text("");
+        jQuery("#field" + mxgcfz).val("");
+    });
 
-    jQuery(".excelDetailTable tr td:nth-child(3) button").live("click", function () {
+
+    jQuery(".excelDetailTable tr td:nth-child(4) button").live("click", function () {//工厂放大镜
+        var zbgcvaule = jQuery("#field" + zbgc).val();
         var lineId = $(this).attr("id").split("_")[1];
-        jQuery("#field12025_"+lineId).bindPropertyChange(function(){
-            jQuery("#field9018_" + lineId + "span").text("");
-            jQuery("#field9018_" + lineId).val("");
+
+
+        if (jQuery("#field9017_" + lineId).attr("flag") === undefined &&
+            jQuery("#field9017_" + lineId).attr("flag") !== "true") {
+
+            jQuery("#field9017_" + lineId).bindPropertyChange(function () {//工厂值转变
+
+                if (jQuery("#field" + gc + "_" + lineId).val() == "")
+                    return;
+
+                var gcvaule = jQuery("#field" + gc + "_" + lineId).val();//明细表工厂的值
+                // alert(zbgcvaulele);
+                if (gcvaule == zbgcvaule) {//进行工厂限制→不可相同
+                    alert("请修改工厂");
+                    jQuery("#field" + gc + "_" + lineId + "span").text("");
+                    jQuery("#field" + gc + "_" + lineId).val("");
+                } else {
+                    if (lineId == '0') { //进行工厂限制→只可选择一个
+                        jQuery("#field" + mxgcfz + "span").text(gcvaule);
+                        jQuery("#field" + mxgcfz).val(gcvaule);
+
+                    } else if ( gcvaule != jQuery("#field" + mxgcfz).val()) {
+                        // alert(jQuery("#field"+mxgcfz).val());
+                        alert("工厂填写不一致");
+                        jQuery("#field" + gc + "_" + lineId + "span").text("");
+                        jQuery("#field" + gc + "_" + lineId).val("");
+                    }
+                }
+
+                jQuery("#field" + lgort + "_" + lineId + "span").text("");//清空传输库存地点的值
+                jQuery("#field" + lgort + "_" + lineId).val("");
+                jQuery("#field" + kucun + "_" + lineId + "span").text("");//清空非传输库存地点的值
+                jQuery("#field" + kucun + "_" + lineId).val("");
+
+            });
+            jQuery("#field9017_" + lineId).attr("_flag","true");
+        }
+
+
+    });
+
+
+    jQuery(".excelDetailTable tr td:nth-child(5) button").live("click", function () {//非传输库存地点放大镜
+        var lineId = $(this).attr("id").split("_")[1];
+        jQuery("#field" + kucun + "_" + lineId).bindPropertyChange(function () {//非传输库存地点
+            var kcvaule = jQuery("#field" + kucun + "_" + lineId).val();//非传输库存地点的值
+            // alert(kcvaule);
+            jQuery("#field" + lgort + "_" + lineId + "span").text(kcvaule);//对传输库存地点进行赋值
+            jQuery("#field" + lgort + "_" + lineId).val(kcvaule);
+        });
+
+    });
+
+    jQuery(".excelDetailTable tr td:nth-child(3) button").live("click", function () {//物料编码放大镜
+        var lineId = $(this).attr("id").split("_")[1];
+        jQuery("#field12025_" + lineId).bindPropertyChange(function () {//物料编码
+            jQuery("#field" + gc + "_" + lineId + "span").text("");//对工厂和库存地点进行清空操作
+            jQuery("#field" + gc + "_" + lineId).val("");
+            jQuery("#field" + lgort + "_" + lineId + "span").text("");
+            jQuery("#field" + lgort + "_" + lineId).val("");
+            jQuery("#field" + kucun + "_" + lineId + "span").text("");
+            jQuery("#field" + kucun + "_" + lineId).val("");
         });
     });
 

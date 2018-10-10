@@ -367,6 +367,8 @@ public class WuLiaoZhuShuJuKuoC extends BaseAction implements Action{
 						FEVOR1="103煅烧";
 					}else if("3010".equals(WERKS1)&&"104".equals(FEVOR)){
 						FEVOR1="104合成";
+					}else if("3010".equals(WERKS1)&&"105".equals(FEVOR)){
+						FEVOR1="105研究所";
 					}else if("3020".equals(WERKS1)&&"101".equals(FEVOR)){
 						FEVOR1="101备料";
 					}else if("3020".equals(WERKS1)&&"102".equals(FEVOR)){
@@ -375,12 +377,38 @@ public class WuLiaoZhuShuJuKuoC extends BaseAction implements Action{
 						FEVOR1="103萃取";
 					}else if("3020".equals(WERKS1)&&"104".equals(FEVOR)){
 						FEVOR1="104产品分厂";
+					}else if("3020".equals(WERKS1)&&"105".equals(FEVOR)){
+						FEVOR1="105环保中心";
+					}else if("3020".equals(WERKS1)&&"106".equals(FEVOR)){
+						FEVOR1="106公辅中心";
+					}else if("3020".equals(WERKS1)&&"107".equals(FEVOR)){
+						FEVOR1="107磷酸铁事业部";
+					}else if("3020".equals(WERKS1)&&"108".equals(FEVOR)){
+						FEVOR1="108电钴";
+					}else if("3020".equals(WERKS1)&&"109".equals(FEVOR)){
+						FEVOR1="109萃取（销售）";
+					}else if("3020".equals(WERKS1)&&"110".equals(FEVOR)){
+						FEVOR1="110电铜";
+					}else if("3020".equals(WERKS1)&&"111".equals(FEVOR)){
+						FEVOR1="111辅助";
+					}else if("3020".equals(WERKS1)&&"112".equals(FEVOR)){
+						FEVOR1="112钴合金";
+					}else if("3020".equals(WERKS1)&&"113".equals(FEVOR)){
+						FEVOR1="113钴合金（销售）";
+					}else if("3020".equals(WERKS1)&&"114".equals(FEVOR)){
+						FEVOR1="114环保中心(销售）";
+					}else if("3020".equals(WERKS1)&&"115".equals(FEVOR)){
+						FEVOR1="115氧压";
+					}else if("3020".equals(WERKS1)&&"116".equals(FEVOR)){
+						FEVOR1="116研究所";
 					}else if("4010".equals(WERKS1)&&"101".equals(FEVOR)){
 						FEVOR1="101溶解";
 					}else if("4010".equals(WERKS1)&&"102".equals(FEVOR)){
 						FEVOR1="102生产线";
 					}else if("4010".equals(WERKS1)&&"103".equals(FEVOR)){
 						FEVOR1="103返溶";
+					}else if("4010".equals(WERKS1)&&"104".equals(FEVOR)){
+						FEVOR1="104研究所";
 					}else if("3030".equals(WERKS1)&&"101".equals(FEVOR)){
 						FEVOR1="101混料";
 					}
@@ -411,7 +439,7 @@ public class WuLiaoZhuShuJuKuoC extends BaseAction implements Action{
 							+FHORI1+",LGPBE='"+LGPBE+"',IPRKZ="+IPRKZ1+",MHDHB="+MHDHB+",MHDRZ="+MHDRZ+",QMPUR="+QMPUR1
 							+",SSQSS="+SSQSS1+",KZDKZ="+KZDKZ1+",BWTTY="+BWTTY1+",BKLAS='"+BKLAS+"',VPRSV="+VPRSV1
 							+",PEINH="+PEINH+",STPRS="+STPRS+",EKALR="+EKALR1+",HKMAT="+HKMAT1+",AWSLS="+AWSLS1+",LOSGR="
-							+LOSGR+",HRKFT='"+HRKFT+"',KOSGR='"+KOSGR+"' where MATNR1 = "+MATNR+" and  mainid="+mianid;
+							+LOSGR+",HRKFT='"+HRKFT+"',KOSGR='"+KOSGR+"' where MATNR1 = '"+MATNR+"' and  mainid="+mianid;
 					new BaseBean().writeLog("sql2="+sql2);
 					rs2.executeSql(sql2);
 					

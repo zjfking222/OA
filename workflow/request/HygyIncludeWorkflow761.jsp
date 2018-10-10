@@ -180,7 +180,7 @@ String workflowid=Util.null2String(request.getParameter("workflowid"));
                         setFMVal("9364",lineData.KZJE);//开证金额
                     }
 
-                    setFMVal("13682",lineData.KZDWMS);//开证单位描述
+                    setFMVal("9353",lineData.KZDWMS);//开证单位描述
                     setFMVal("9354",lineData.GYSMS);//供应商描述
                     setFMVal("9362",lineData.RZXS);//融资系数
                     setFMVal("9509",lineData.JJY);//计价月
@@ -205,7 +205,7 @@ String workflowid=Util.null2String(request.getParameter("workflowid"));
                         setFMVal("9368",lineData.HL);//汇率
                         setFMVal("9371",lineData.KZJE);//开证金额
                     }
-                    setFMVal("13683",lineData.KZDWMS);//开证单位描述
+                    setFMVal("9481",lineData.KZDWMS);//开证单位描述
                     setFMVal("9482",lineData.GYSMS);//供应商描述
                     setFMVal("9369",lineData.RZXS);//融资系数
                     setFMVal("9510",lineData.JJY);//计价月

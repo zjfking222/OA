@@ -214,6 +214,7 @@ public class WuLiaoZhuShuJuXiuGai extends BaseAction implements Action{
 					Object TAXM11 =0;
 					Object MLAST1 = 0;
 					Object FEVOR1="";
+					Object WRKST1 = 0;
 					//税分类转换1 全税 0   2 半税 专用于硫酸铵 1 
 					if(TAXM1.equals("1")){
 						TAXM11 = 0;
@@ -354,9 +355,8 @@ public class WuLiaoZhuShuJuXiuGai extends BaseAction implements Action{
 					}else{
 						MLAST1= "null";
 					}
-					
+
 					//生产调度员转换 FEVOR1 WERKS1
-					
 					if("3010".equals(WERKS1)&&"101".equals(FEVOR)){
 						FEVOR1="101磨浸";
 					}else if("3010".equals(WERKS1)&&"102".equals(FEVOR)){
@@ -365,6 +365,8 @@ public class WuLiaoZhuShuJuXiuGai extends BaseAction implements Action{
 						FEVOR1="103煅烧";
 					}else if("3010".equals(WERKS1)&&"104".equals(FEVOR)){
 						FEVOR1="104合成";
+					}else if("3010".equals(WERKS1)&&"105".equals(FEVOR)){
+						FEVOR1="105研究所";
 					}else if("3020".equals(WERKS1)&&"101".equals(FEVOR)){
 						FEVOR1="101备料";
 					}else if("3020".equals(WERKS1)&&"102".equals(FEVOR)){
@@ -373,14 +375,55 @@ public class WuLiaoZhuShuJuXiuGai extends BaseAction implements Action{
 						FEVOR1="103萃取";
 					}else if("3020".equals(WERKS1)&&"104".equals(FEVOR)){
 						FEVOR1="104产品分厂";
+					}else if("3020".equals(WERKS1)&&"105".equals(FEVOR)){
+						FEVOR1="105环保中心";
+					}else if("3020".equals(WERKS1)&&"106".equals(FEVOR)){
+						FEVOR1="106公辅中心";
+					}else if("3020".equals(WERKS1)&&"107".equals(FEVOR)){
+						FEVOR1="107磷酸铁事业部";
+					}else if("3020".equals(WERKS1)&&"108".equals(FEVOR)){
+						FEVOR1="108电钴";
+					}else if("3020".equals(WERKS1)&&"109".equals(FEVOR)){
+						FEVOR1="109萃取（销售）";
+					}else if("3020".equals(WERKS1)&&"110".equals(FEVOR)){
+						FEVOR1="110电铜";
+					}else if("3020".equals(WERKS1)&&"111".equals(FEVOR)){
+						FEVOR1="111辅助";
+					}else if("3020".equals(WERKS1)&&"112".equals(FEVOR)){
+						FEVOR1="112钴合金";
+					}else if("3020".equals(WERKS1)&&"113".equals(FEVOR)){
+						FEVOR1="113钴合金（销售）";
+					}else if("3020".equals(WERKS1)&&"114".equals(FEVOR)){
+						FEVOR1="114环保中心(销售）";
+					}else if("3020".equals(WERKS1)&&"115".equals(FEVOR)){
+						FEVOR1="115氧压";
+					}else if("3020".equals(WERKS1)&&"116".equals(FEVOR)){
+						FEVOR1="116研究所";
 					}else if("4010".equals(WERKS1)&&"101".equals(FEVOR)){
 						FEVOR1="101溶解";
 					}else if("4010".equals(WERKS1)&&"102".equals(FEVOR)){
 						FEVOR1="102生产线";
 					}else if("4010".equals(WERKS1)&&"103".equals(FEVOR)){
 						FEVOR1="103返溶";
+					}else if("4010".equals(WERKS1)&&"104".equals(FEVOR)){
+						FEVOR1="104研究所";
 					}else if("3030".equals(WERKS1)&&"101".equals(FEVOR)){
 						FEVOR1="101混料";
+					}
+
+
+					//基本物料转换  WRKST1
+
+					if(WRKST.equals("常规物资")){
+						WRKST1 = 0 ;
+					}else if(WRKST.equals("进料加工")){
+						WRKST1 = 1;
+					}else if(WRKST.equals("受托加工")){
+						WRKST1 = 2;
+					}else if(WRKST.equals("一般贸易")){
+						WRKST1 = 3;
+					}else if(WRKST.equals("自有贸易")){
+						WRKST1 = 4;
 					}
 					
 					
@@ -401,8 +444,9 @@ public class WuLiaoZhuShuJuXiuGai extends BaseAction implements Action{
 					new BaseBean().writeLog("AWSLS1="+AWSLS1);
 					new BaseBean().writeLog("MLAST1="+MLAST1);
 					new BaseBean().writeLog("FEVOR1="+FEVOR1);
+					new BaseBean().writeLog("WRKST1="+WRKST1);
 					
-					String sql2 = "update "+tablename+"_dt1  set FEVOR='"+FEVOR1+"',MLAST='"+MLAST1+"',TAXM1="+TAXM11+",MATNR='"+MATNR+"',MTART="+MTART1+",WRKST='"+WRKST+"',SPART="+SPART+",VKORG='"+VKORG+"',VTWEG='"+VTWEG+"',DWERK='"+DWERK+"',KTGRM='"+KTGRM+"',KONDM="+KONDM1+",XCHPF=1,DISMM='"+DISMM+"',DISPO='"+DISPO+"',DISLS='"+DISLS+"',BESKZ="+BESKZ1+",LGPRO='"+LGPRO+"',LGFSB='"+LGFSB+"',FHORI="+FHORI1+",LGPBE='"+LGPBE+"',IPRKZ="+IPRKZ1+",MHDHB="+MHDHB+",MHDRZ="+MHDRZ+",QMPUR="+QMPUR1+",SSQSS="+SSQSS1+",KZDKZ="+KZDKZ1+",BWTTY="+BWTTY1+",BKLAS='"+BKLAS+"',VPRSV="+VPRSV1+",PEINH="+PEINH+",STPRS="+STPRS+",EKALR="+EKALR1+",HKMAT="+HKMAT1+",AWSLS="+AWSLS1+",LOSGR="+LOSGR+",HRKFT='"+HRKFT+"',KOSGR='"+KOSGR+"' where MATNR1 = "+MATNR+" and  mainid="+mianid;
+					String sql2 = "update "+tablename+"_dt1  set FEVOR='"+FEVOR1+"',MLAST='"+MLAST1+"',TAXM1="+TAXM11+",MATNR='"+MATNR+"',MTART="+MTART1+",WRKST='"+WRKST1+"',SPART="+SPART+",VKORG='"+VKORG+"',VTWEG='"+VTWEG+"',DWERK='"+DWERK+"',KTGRM='"+KTGRM+"',KONDM="+KONDM1+",XCHPF=1,DISMM='"+DISMM+"',DISPO='"+DISPO+"',DISLS='"+DISLS+"',BESKZ="+BESKZ1+",LGPRO='"+LGPRO+"',LGFSB='"+LGFSB+"',FHORI="+FHORI1+",LGPBE='"+LGPBE+"',IPRKZ="+IPRKZ1+",MHDHB="+MHDHB+",MHDRZ="+MHDRZ+",QMPUR="+QMPUR1+",SSQSS="+SSQSS1+",KZDKZ="+KZDKZ1+",BWTTY="+BWTTY1+",BKLAS='"+BKLAS+"',VPRSV="+VPRSV1+",PEINH="+PEINH+",STPRS="+STPRS+",EKALR="+EKALR1+",HKMAT="+HKMAT1+",AWSLS="+AWSLS1+",LOSGR="+LOSGR+",HRKFT='"+HRKFT+"',KOSGR='"+KOSGR+"' where MATNR1 = "+MATNR+" and  mainid="+mianid;
 					new BaseBean().writeLog("sql2="+sql2);
 					rs2.executeSql(sql2);
 					
