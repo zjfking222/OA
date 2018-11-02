@@ -99,11 +99,13 @@ public class ZiChanTiaoBo extends BaseAction {
 			String E_TYPE = outs.getString("FLAG");
 			String E_MESSAGE = outs.getString("MESSAGE");
 			new BaseBean().writeLog("e_type:"+E_TYPE+",E_MESSAGE:"+E_MESSAGE);
-			if ("E".equals(E_TYPE)) {
-				requestInfo.getRequestManager().setMessageid("111100");// 提醒信息id
-				requestInfo.getRequestManager().setMessagecontent("执行出错，SAP返回错误信息." + E_MESSAGE);// 提醒信息内容
-				return "0";
-			}
+			if (!ANLNR.equals("")){
+				if ("E".equals(E_TYPE)) {
+					requestInfo.getRequestManager().setMessageid("111100");// 提醒信息id
+					requestInfo.getRequestManager().setMessagecontent("执行出错，SAP返回错误信息." + E_MESSAGE);// 提醒信息内容
+					return "0";
+				}
+			}else{return Action.SUCCESS;}
 		}catch(Exception e){
 			message=e.getMessage();
 		    e.printStackTrace();
@@ -114,7 +116,6 @@ public class ZiChanTiaoBo extends BaseAction {
 	    		SAPUtil.releaseClient(myConnection);//关闭连接池
 			}
 		}
-		
 		if(error==1){
 	    	requestInfo.getRequestManager().setMessageid("111100");//提醒信息id
 	    	requestInfo.getRequestManager().setMessagecontent("action执行出错-流程不允许提交到下一节点."+message);//提醒信息内容
