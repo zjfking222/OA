@@ -52,6 +52,8 @@ try{
 		hashmap.put("cu",IT_ITEM.getString("ZYL020"));//CU数量
 		hashmap.put("ni",IT_ITEM.getString("ZYL023"));//NI数量
 		hashmap.put("ge",IT_ITEM.getString("ZYL026"));//GE数量
+		hashmap.put("li",IT_ITEM.getString("ZYLO37"));//li数量
+		hashmap.put("mn",IT_ITEM.getString("ZYLO40"));//Mn数量
 		json = JSONObject.fromObject(hashmap);
 	}
     out.print(json.toString());

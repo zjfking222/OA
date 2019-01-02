@@ -8,6 +8,12 @@
 %>
 <%
  //信用证修改流程  读取BPC模版接口js
+
+    /**
+     * 信用证修改
+     * @author CYN
+     *
+     */
 new BaseBean().writeLog("信用证修改流程  读取BPC模版接口js ");
 int formid=Util.getIntValue(request.getParameter("formid"));
 String nodeid=Util.null2String(request.getParameter("nodeid"));
@@ -111,9 +117,10 @@ String workflowid=Util.null2String(request.getParameter("workflowid"));
 
     //明细1赋值 信用证信息
     function setDt1Data(dt1Data){
-        var lineData;
+        var lineData,lineDLength;
         deleteRow(0);
         deleteRow(1);
+        // alert(JSON.stringify(dt1Data));
         for(var i=0;i<dt1Data.length;i++){
             lineData=dt1Data[i];
                 if(lineData.XYZLX==="1"){
@@ -129,6 +136,12 @@ String workflowid=Util.null2String(request.getParameter("workflowid"));
                     addRow0(0);
                     setFMVal(jijia1+"_"+3,3);
                     setFMVal(shlmt1+"_"+3,lineData.NiSL);
+                    addRow0(0);
+                    setFMVal(jijia1+"_"+4,4);
+                    setFMVal(shlmt1+"_"+4,lineData.LiSL);
+                    addRow0(0);
+                    setFMVal(jijia1+"_"+5,5);
+                    setFMVal(shlmt1+"_"+5,lineData.MnSL);
 
                 }else {
                     // alert(JSON.stringify(lineData))
@@ -144,8 +157,15 @@ String workflowid=Util.null2String(request.getParameter("workflowid"));
                     addRow1(1);
                     setFMVal(jijia2+"_"+3,3);
                     setFMVal(shlmt2+"_"+3,lineData.NiSL);
+                    addRow1(1);
+                    setFMVal(jijia2+"_"+4,4);
+                    setFMVal(shlmt2+"_"+4,lineData.LiSL);
+                    addRow1(1);
+                    setFMVal(jijia2+"_"+5,5);
+                    setFMVal(shlmt2+"_"+5,lineData.MnSL);
                 }
                 // alert(jQuery("tr[_target='datarow']").length);//获取明细表行数
+
 
         }
     }

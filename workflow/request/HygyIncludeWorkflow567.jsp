@@ -210,6 +210,18 @@ function getWzsl(){
 					setFMVal(wzjslx+"_"+rowindex,"3");
 					//setFMVal(wzsl+"_"+rowindex,obj.ni);
    	 			}
+                if(obj.li>0){ //锂
+                    addRow0(0);
+                    var rowindex = (jQuery('#indexnum0').val()-1);//行号
+                    setFMVal(wzjslx+"_"+rowindex,"4");
+                    //setFMVal(wzsl+"_"+rowindex,obj.ni);
+                }
+                if(obj.mn>0){ //锰
+                    addRow0(0);
+                    var rowindex = (jQuery('#indexnum0').val()-1);//行号
+                    setFMVal(wzjslx+"_"+rowindex,"5");
+                    //setFMVal(wzsl+"_"+rowindex,obj.ni);
+                }
    	 			deleteRow(1);
 	 			if(obj.co>0){
 					addRow1(1);
@@ -235,6 +247,18 @@ function getWzsl(){
 				setFMVal(nzjslx+"_"+rowindex,"3");
 				//setFMVal(nzsl+"_"+rowindex,obj.ni);
 	 			}
+                if(obj.li>0){
+                    addRow1(1);
+                    var rowindex = (jQuery('#indexnum1').val()-1);//行号
+                    setFMVal(nzjslx+"_"+rowindex,"4");
+                    //setFMVal(nzsl+"_"+rowindex,obj.ge);
+                }
+                if(obj.mn>0){
+                    addRow1(1);
+                    var rowindex = (jQuery('#indexnum1').val()-1);//行号
+                    setFMVal(nzjslx+"_"+rowindex,"5");
+                    //setFMVal(nzsl+"_"+rowindex,obj.ge);
+                }
      	 	},
      		error:function(data){
    	 			alert("读取出错，请联系系统管理员");
@@ -281,6 +305,18 @@ function getNzsl(){
 					setFMVal(nzjslx+"_"+rowindex,"3");
 					//setFMVal(nzsl+"_"+rowindex,obj.ni);
   	 			}
+                if(obj.li>0){
+                    addRow1(1);
+                    var rowindex = (jQuery('#indexnum1').val()-1);//行号
+                    setFMVal(nzjslx+"_"+rowindex,"4");
+                    //setFMVal(nzsl+"_"+rowindex,obj.ni);
+                }
+                if(obj.mn>0){
+                    addRow1(1);
+                    var rowindex = (jQuery('#indexnum1').val()-1);//行号
+                    setFMVal(nzjslx+"_"+rowindex,"5");
+                    //setFMVal(nzsl+"_"+rowindex,obj.ni);
+                }
     	 	},
     		error:function(data){
   	 			alert("读取出错，请联系系统管理员");

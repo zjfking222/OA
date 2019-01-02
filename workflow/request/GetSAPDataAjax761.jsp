@@ -10,6 +10,11 @@
 <jsp:useBean id="SAPUtil" class="com.jiuyi.util.SAPUtil" scope="page" />
 
 <%
+    /**
+     * 信用证修改
+     * @author CYN
+     *
+     */
     JCO.Client myConnection = SAPUtil.getSAPcon("1");//BPC数据源
     try{
         new BaseBean().writeLog("读取BPC信用证信息接口 ");
@@ -45,6 +50,8 @@
             dt1Obj.put("CuSL",IT_ZTFI117.getString("ZJK014"));
             dt1Obj.put("NiSL",IT_ZTFI117.getString("ZJK021"));
             dt1Obj.put("GeSL",IT_ZTFI117.getString("ZJK022"));
+            dt1Obj.put("LiSL",IT_ZTFI117.getString("ZJKN01"));
+            dt1Obj.put("MnSL",IT_ZTFI117.getString("ZJKN02"));
 
             dt1Arr.add(dt1Obj);
             //获取主表数据

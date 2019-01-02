@@ -454,7 +454,8 @@ public class TransUtil {
 			result = Util.null2String(rs.getString("shlmt"));
 		}
 		return result;
-	}/**
+	}
+	/**
 	 * 信用证创建 内证Ge开证数量（明细表）
 	 * @param requestid
 	 * @return result
@@ -463,6 +464,68 @@ public class TransUtil {
 		String result = "";
 		RecordSet rs = new RecordSet();
 		String sql="select shlmt from formtable_main_181_dt2 where mainid = (select id from formtable_main_181 where requestid='"+requestid+"') and jijia='2'";
+		rs.execute(sql);
+		if(rs.next()){
+			result = Util.null2String(rs.getString("shlmt"));
+		}
+		return result;
+	}
+	/**
+	 * 信用证创建 内证Li开证数量（明细表）
+	 * @param requestid
+	 * @return result
+	 */
+	public static String getLiNzKzsl(String requestid){
+		String result = "";
+		RecordSet rs = new RecordSet();
+		String sql="select shlmt from formtable_main_181_dt2 where mainid = (select id from formtable_main_181 where requestid='"+requestid+"') and jijia='4'";
+		rs.execute(sql);
+		if(rs.next()){
+			result = Util.null2String(rs.getString("shlmt"));
+		}
+		return result;
+	}
+	/**
+	 * 信用证创建 内证Mn开证数量（明细表）
+	 * @param requestid
+	 * @return result
+	 */
+	public static String getMnNzKzsl(String requestid){
+		String result = "";
+		RecordSet rs = new RecordSet();
+		String sql="select shlmt from formtable_main_181_dt2 where mainid = (select id from formtable_main_181 where requestid='"+requestid+"') and jijia='5'";
+		rs.execute(sql);
+		if(rs.next()){
+			result = Util.null2String(rs.getString("shlmt"));
+		}
+		return result;
+	}
+	/**
+	 * 信用证创建 外证Li开证数量（明细表）
+	 * @param requestid
+	 * @return result
+	 */
+	public static String getLiWzKzsl(String requestid){
+
+		String result = "";
+		RecordSet rs = new RecordSet();
+		String sql="select shlmt from formtable_main_181_dt1 where mainid = (select id from formtable_main_181 where requestid='"+requestid+"') and jijia='4'";
+		rs.execute(sql);
+		if(rs.next()){
+			result = Util.null2String(rs.getString("shlmt"));
+		}
+		new BaseBean().writeLog("waizhengli:"+result);
+		return result;
+	}
+	/**
+	 * 信用证创建 外证Mn开证数量（明细表）
+	 * @param requestid
+	 * @return result
+	 */
+	public static String getMnWzKzsl(String requestid){
+		String result = "";
+		RecordSet rs = new RecordSet();
+		String sql="select shlmt from formtable_main_181_dt1 where mainid = (select id from formtable_main_181 where requestid='"+requestid+"') and jijia='5'";
 		rs.execute(sql);
 		if(rs.next()){
 			result = Util.null2String(rs.getString("shlmt"));
@@ -480,7 +543,7 @@ public class TransUtil {
 	}
 	/**
 	 * 财务流程 抬头文本凭借
-	 * @param value
+	 * @param requestid
 	 * @return name
 	 */
 	public static String getHeaderText(String requestid){
