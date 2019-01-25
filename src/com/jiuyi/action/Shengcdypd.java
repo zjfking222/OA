@@ -16,16 +16,18 @@ public class Shengcdypd extends BaseAction implements Action {
         RecordSet rs1 = new RecordSet();
         int error = 0;
         int mianid=0;
+        int wuzlx=0;
         JCO.Client myConnection =null;
         String requestid = requestInfo.getRequestid();//请求号
         String workflowid = requestInfo.getWorkflowid();//流程id
         String tablename = SAPUtil.getTablename(requestInfo);//表名
         String message = "";
 
-        String sql = "select id from "+tablename+" where requestid="+requestid;
+        String sql = "select id,wuzlx from "+tablename+" where requestid="+requestid;
         rs.execute(sql);
         rs.next();
         mianid = rs.getInt(1);
+        wuzlx = rs.getInt(2);
         try {
             String sql1 = "select MTART,FEVOR1,BWTTY from "+tablename+"_dt1 where mainid="+mianid;
             new BaseBean().writeLog("sql1=="+sql1);
@@ -52,6 +54,32 @@ public class Shengcdypd extends BaseAction implements Action {
                     if(null != BWTTY && !"".equals(BWTTY)){
                         requestInfo.getRequestManager().setMessage("111100");//
                         requestInfo.getRequestManager().setMessagecontent("非原料、半成品、成品无需填写评估类别");
+                        return "0";
+                    }
+                }
+                //控制主表和明细表物料类型一致
+                if(wuzlx==15){
+                    if(!MTART.equals("3")){
+                        requestInfo.getRequestManager().setMessage("111100");//
+                        requestInfo.getRequestManager().setMessagecontent("物料类型不一致");
+                        return "0";
+                    }
+                }else if (wuzlx==14){
+                    if(!MTART.equals("2")){
+                        requestInfo.getRequestManager().setMessage("111100");//
+                        requestInfo.getRequestManager().setMessagecontent("物料类型不一致");
+                        return "0";
+                    }
+                }else if (wuzlx==13){
+                    if(!MTART.equals("0")){
+                        requestInfo.getRequestManager().setMessage("111100");//
+                        requestInfo.getRequestManager().setMessagecontent("物料类型不一致");
+                        return "0";
+                    }
+                }else if (wuzlx==12){
+                    if(!MTART.equals("1")){
+                        requestInfo.getRequestManager().setMessage("111100");//
+                        requestInfo.getRequestManager().setMessagecontent("物料类型不一致");
                         return "0";
                     }
                 }
