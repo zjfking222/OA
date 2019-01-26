@@ -173,7 +173,16 @@ public class SellTicketsOrWriteOff {
 	             }else if(Util.null2String(st.getBURKS()).equals("2010")){
 	            	 p[22].setValue(Util.null2String("5"));
 	            	 ssgs = "5";//
-	             }
+	             }else if(Util.null2String(st.getBURKS()).equals("2020")){
+					 p[22].setValue(Util.null2String("6"));
+					 ssgs = "6";//华友循环
+				 }else if(Util.null2String(st.getBURKS()).equals("5010")){
+					 p[22].setValue(Util.null2String("7"));
+					 ssgs = "7";//华友电力
+				 }else if(Util.null2String(st.getBURKS()).equals("1010")){
+					 p[22].setValue(Util.null2String("8"));
+					 ssgs = "8";//华友进出口
+				 }
 	              
 	             //仓库操作员  财务销售会计  出门证最终审核人
 	             String sql= "select SDMX3,SDMX5 from formtable_main_237_dt1 where SDMX1 = "+ssgs;
