@@ -59,27 +59,27 @@ public class Shengcdypd extends BaseAction implements Action {
                 }
                 //控制主表和明细表物料类型一致
                 if(wuzlx==15){
-                    if(!MTART.equals("3")){
+                    if(!MTART.equals("3")||!MTART.equals("7")){
                         requestInfo.getRequestManager().setMessage("111100");//
-                        requestInfo.getRequestManager().setMessagecontent("物料类型不一致");
+                        requestInfo.getRequestManager().setMessagecontent("物料类型与主表不一致");
                         return "0";
                     }
                 }else if (wuzlx==14){
                     if(!MTART.equals("2")){
                         requestInfo.getRequestManager().setMessage("111100");//
-                        requestInfo.getRequestManager().setMessagecontent("物料类型不一致");
+                        requestInfo.getRequestManager().setMessagecontent("物料类型与主表不一致");
                         return "0";
                     }
                 }else if (wuzlx==13){
                     if(!MTART.equals("0")){
                         requestInfo.getRequestManager().setMessage("111100");//
-                        requestInfo.getRequestManager().setMessagecontent("物料类型不一致");
+                        requestInfo.getRequestManager().setMessagecontent("物料类型与主表不一致");
                         return "0";
                     }
                 }else if (wuzlx==12){
                     if(!MTART.equals("1")){
                         requestInfo.getRequestManager().setMessage("111100");//
-                        requestInfo.getRequestManager().setMessagecontent("物料类型不一致");
+                        requestInfo.getRequestManager().setMessagecontent("物料类型与主表不一致");
                         return "0";
                     }
                 }
