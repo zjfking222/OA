@@ -86,7 +86,7 @@ jQuery(document).ready(function(){
 					    jQuery("#field9265_" + i).val(usd);
 					    jQuery("#field9266_" + i).val(usd*hl*rzxs);
 	                }else{
-					    usd = mt*gudj;
+					    usd = mt*xishu*gudj;//货值USD=数量(kg)*系数*固定价
 					    kzhje1usd = kzhje1usd+usd;
 					    jQuery("#field9265_" + i).val(usd);
 					    jQuery("#field9266_" + i).val(usd*hl*rzxs);
@@ -137,7 +137,7 @@ jQuery(document).ready(function(){
 					jQuery("#field9344_" + j).val(usd2);
 				    jQuery("#field9345_" + j).val(usd2*hl2*rzxs2);
 				}else{
-				    usd2 = mt2*gudj2;
+				    usd2 = mt2*xishu2*gudj2;//货值USD=数量(kg)*系数*公式价
 				    kzhje1usd2 = kzhje1usd2+usd2;
 				    jQuery("#field9344_" + j).val(usd2);
 				    jQuery("#field9345_" + j).val(usd2*hl2*rzxs2);
