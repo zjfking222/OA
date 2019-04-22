@@ -29,9 +29,12 @@
 %>
 <script type="text/javascript" src="wui/common/jquery/jquery.min_wev8.js"></script>
 <script type="text/javascript">
-    //MM-生产性物料扩充
     /*****************主表********************/
-
+    /**
+     * MM-生产性物料扩充
+     * @author CYN
+     *
+     */
     var wllx = '<%=wllx%>';//物料类型
     var lx = '<%=lx%>';//类型
     var zbgc = '<%=zbgc%>';//主表工厂
@@ -62,6 +65,10 @@
             var wllxvalue = "3YCL";
         } else if (lxvaule === "5") {
             var wllxvalue = "8STY";
+        }else if (lxvaule === "6") {
+            var wllxvalue = "1WZ";
+        }else if (lxvaule === "7") {
+            var wllxvalue = "6GZ";
         }
 
         setFMVal(wllx, wllxvalue);
