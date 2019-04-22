@@ -37,6 +37,10 @@
         String jjRMB=map.get("cpnxsjjrmb");//产品拟销售净价rmb
         String htRMB=map.get("htcjjrmb");//合同成交价人民币
         String htUSD=map.get("htcjj");//合同成交价美元
+        String gc=map.get("gc");//工厂
+        String sjhl=map.get("sjhl");//实际汇率
+        String ysk=map.get("ysk");//应收款
+        String yqk=map.get("yqk");//逾期款
 
 
         map1 = CommonUtil.getFieldId(formid, "1");//明细1
@@ -44,6 +48,7 @@
         String cpmc = map1.get("cpmc");//产品名称
         String gg = map1.get("gg");//规格
         String wlms =map1.get("wlms");//物料描述
+        String khbm =map1.get("cpbh");//客户编号
 
 
 %>
@@ -77,6 +82,10 @@
     var jjUSD='<%=jjUSD%>';//产品拟销售净价USD
     var htRMB='<%=htRMB%>';//合同成交价rmb
     var htUSD='<%=htUSD%>';//合同成交价USD
+    var gc='<%=gc%>';//工厂
+    var sjhl='<%=sjhl%>';//实际汇率
+    var ysk='<%=ysk%>';//应收款
+    var yqk='<%=yqk%>';//逾期款
 
 
 
@@ -87,6 +96,7 @@
     var cpmc = '<%=cpmc%>';//产品名称
     var gg = '<%=gg%>';//规格
     var wlms = '<%=wlms%>';//物料描述
+    var khbm = '<%=khbm%>';//客户编码
 
 
     jQuery(function(){
@@ -136,7 +146,7 @@
         });
         jQuery("#field"+xsRMB).bindPropertyChange(function(){//销售费用人民币
             if (jQuery("#field"+bjlb).val()==1) {
-                setFMVal(xsUSD, ((jQuery("#field" + xsRMB).val() / jQuery("#field" + myhl).val())).toFixed(2));//销售费用
+                setFMVal(xsUSD, ((jQuery("#field" + xsRMB).val() / jQuery("#field" + sjhl).val())).toFixed(2));//销售费用
             }else {
                 setFMVal(xsUSD,'0.00');
                 setFMVal(jjUSD,'0.00');
@@ -149,7 +159,10 @@
             var cpusd=jQuery("#field"+cpUSD).val();
             var xsusd=jQuery("#field"+xsUSD).val();
             var ysusd=jQuery("#field"+ysUSD).val();
-            setFMVal(jjRMB,((cpusd-xsusd-ysusd)*jQuery("#field"+myhl).val()).toFixed(2));//产品拟销售净价=产品拟报单价-销售费用-(佣金+佣金税)
+            var cprmb=jQuery("#field"+cpRMB).val();
+            var xsrmb=jQuery("#field"+xsRMB).val();
+            var ysrmb=jQuery("#field"+ysRMB).val();
+            setFMVal(jjRMB,(cprmb-xsrmb-ysrmb).toFixed(2));//产品拟销售净价=产品拟报单价-销售费用-(佣金+佣金税)
             setFMVal(jjUSD,(cpusd-xsusd-ysusd).toFixed(2));//产品拟报单价-销售费用-(佣金+佣金税)
         });
         if (jQuery("#field"+bjlb).val()==0) {
@@ -176,6 +189,12 @@
             } else if(jQuery("#field"+bjlb).val()==1) {//国际
                 setFMVal(zje,((jQuery("#field"+cpUSD).val()*jQuery("#field"+sl).val())/10000).toFixed(2)+'万美元');//国外总金额
             }
+        });
+        jQuery("#field"+gc).bindPropertyChange(function(){//工厂
+            var khbm1 = jQuery("#field"+khbm+"_0").val();
+            var gc1 = jQuery("#field"+gc+"span").text();
+            // alert("gc"+gc1+"khbm"+khbm1);
+            setDetailData(gc1,khbm1);
         });
 
     }
@@ -208,6 +227,34 @@
         }
 
     });
+
+
+    //添加数据
+    function setDetailData(gc,khbm){
+        if(gc===''||khbm===''){
+
+        }else{
+            jQuery.ajax({
+                url:"/workflow/request/GetSAPDataAjax861.jsp",
+                type:"post",
+                data:{"gc":gc,"khbm":khbm},
+                async: true,
+                success:function(data){
+                    var mes=eval('('+data+')');
+                    // eval("var obj="+data);
+                    var dt1Data=mes.dt1;
+                    setFMVal(ysk,dt1Data[0].ZYSJE);//应收款
+                    setFMVal(yqk,dt1Data[0].ZYQJE);//逾期款
+
+                },
+                error:function(e){
+                    console.log(e);
+                    alert("错误"+e);
+                }
+            });
+        }
+
+    }
 
 
 
