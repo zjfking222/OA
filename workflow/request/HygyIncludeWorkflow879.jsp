@@ -45,8 +45,10 @@
 
     jQuery(function() {
         //绑定监听
+
         // alert($(".excelMainTable tr").length-2);
         // nodeid!=6394&&nodeid!=6397&&nodeid!=6393&&nodeid!=6388测试机
+        //nodeid!=6796&&nodeid!=6802&&nodeid!=6805&&nodeid!=6801正式机
         // alert(nodeid);
         if(nodeid!=6796&&nodeid!=6802&&nodeid!=6805&&nodeid!=6801) {
             $("#detailDiv_4").addClass("edesign_hide");//餐饮需求表
@@ -58,11 +60,14 @@
                 $(".excelMainTable tr:eq(" + i + ")").addClass("edesign_hide");
             }
         }
+        //正式机6803
+        //测试机6395
         if(nodeid==6803){
 
             bindchange();//绑定监听
 
-        }else {
+        }
+        else {
             moveHide();
         }
 
@@ -72,6 +77,7 @@
     function bindchange(){
         jQuery("#field"+yj).on('change',function(){//迎接
             if($("#field"+yj).is(":checked")){
+
                 $(".excelMainTable tr:eq(12)").addClass("edesign_hide");
                 $(".excelMainTable tr:eq(13)").addClass("edesign_hide");
             }else {
@@ -126,6 +132,7 @@
                 $(".excelMainTable tr:eq(23)").removeClass("edesign_hide");
                 $(".excelMainTable tr:eq(24)").removeClass("edesign_hide");
                 $("#detailDiv_4").removeClass("edesign_hide");//餐饮需求表
+                $("#detailDiv_4 tr").removeClass("edesign_hide");//餐饮需求表
 
                 $(".excelMainTable tr:eq(25)").removeClass("edesign_hide");
                 $(".excelMainTable tr:eq(26)").removeClass("edesign_hide");
@@ -156,6 +163,8 @@
                 $(".excelMainTable tr:eq(37)").removeClass("edesign_hide");
 
                 $("#detailDiv_5").removeClass("edesign_hide");//住宿需求表
+                $("#detailDiv_5 tr").removeClass("edesign_hide");//住宿需求表
+
             }
 
         });
@@ -176,6 +185,8 @@
                 $(".excelMainTable tr:eq(47)").addClass("edesign_hide");
                 $(".excelMainTable tr:eq(48)").addClass("edesign_hide");
                 $(".excelMainTable tr:eq(49)").addClass("edesign_hide");
+                // $(".excelMainTable tr:eq(50)").addClass("edesign_hide");
+                // $(".excelMainTable tr:eq(51)").addClass("edesign_hide");
 
                 $("#detailDiv_3").addClass("edesign_hide");//派车送表
             }else {
@@ -184,6 +195,7 @@
                 $(".excelMainTable tr:eq(39)").removeClass("edesign_hide");
                 $(".excelMainTable tr:eq(40)").removeClass("edesign_hide");
                 $("#detailDiv_2").removeClass("edesign_hide");//派车接表
+                $("#detailDiv_2 tr").removeClass("edesign_hide");//派车接表
 
                 $(".excelMainTable tr:eq(41)").removeClass("edesign_hide");
                 $(".excelMainTable tr:eq(42)").removeClass("edesign_hide");
@@ -194,8 +206,11 @@
                 $(".excelMainTable tr:eq(47)").removeClass("edesign_hide");
                 $(".excelMainTable tr:eq(48)").removeClass("edesign_hide");
                 $(".excelMainTable tr:eq(49)").removeClass("edesign_hide");
+                // $(".excelMainTable tr:eq(50)").removeClass("edesign_hide");
+                // $(".excelMainTable tr:eq(51)").removeClass("edesign_hide");
 
                 $("#detailDiv_3").removeClass("edesign_hide");//派车送表
+                $("#detailDiv_3 tr").removeClass("edesign_hide");//派车送表
             }
         });
         jQuery("#field"+qt).on('change',function(){//其他
@@ -212,12 +227,20 @@
                 $(".excelMainTable tr:eq(57)").addClass("edesign_hide");
                 $(".excelMainTable tr:eq(58)").addClass("edesign_hide");
                 $(".excelMainTable tr:eq(59)").addClass("edesign_hide");
+                $(".excelMainTable tr:eq(60)").addClass("edesign_hide");
+                $(".excelMainTable tr:eq(61)").addClass("edesign_hide");
+                $(".excelMainTable tr:eq(62)").addClass("edesign_hide");
+                $(".excelMainTable tr:eq(63)").addClass("edesign_hide");
+                $(".excelMainTable tr:eq(64)").addClass("edesign_hide");
+                $(".excelMainTable tr:eq(65)").addClass("edesign_hide");
+                $(".excelMainTable tr:eq(66)").addClass("edesign_hide");
             }else {
 
                 $(".excelMainTable tr:eq(50)").removeClass("edesign_hide");
                 $(".excelMainTable tr:eq(51)").removeClass("edesign_hide");
                 $(".excelMainTable tr:eq(52)").removeClass("edesign_hide");
                 $("#detailDiv_0").removeClass("edesign_hide");//礼品表
+                $("#detailDiv_0 tr").removeClass("edesign_hide");//礼品表
 
                 $(".excelMainTable tr:eq(53)").removeClass("edesign_hide");
                 $(".excelMainTable tr:eq(54)").removeClass("edesign_hide");
@@ -226,6 +249,13 @@
                 $(".excelMainTable tr:eq(57)").removeClass("edesign_hide");
                 $(".excelMainTable tr:eq(58)").removeClass("edesign_hide");
                 $(".excelMainTable tr:eq(59)").removeClass("edesign_hide");
+                $(".excelMainTable tr:eq(60)").removeClass("edesign_hide");
+                $(".excelMainTable tr:eq(61)").removeClass("edesign_hide");
+                $(".excelMainTable tr:eq(62)").removeClass("edesign_hide");
+                $(".excelMainTable tr:eq(63)").removeClass("edesign_hide");
+                $(".excelMainTable tr:eq(64)").removeClass("edesign_hide");
+                $(".excelMainTable tr:eq(65)").removeClass("edesign_hide");
+                $(".excelMainTable tr:eq(66)").removeClass("edesign_hide");
             }
 
         });
@@ -252,6 +282,7 @@
             $(".excelMainTable tr:eq(23)").removeClass("edesign_hide");
             $(".excelMainTable tr:eq(24)").removeClass("edesign_hide");
             $("#detailDiv_4").removeClass("edesign_hide");//餐饮需求表
+            $("#detailDiv_4 tr").removeClass("edesign_hide");//餐饮需求表
 
             $(".excelMainTable tr:eq(25)").removeClass("edesign_hide");
             $(".excelMainTable tr:eq(26)").removeClass("edesign_hide");
@@ -270,6 +301,7 @@
             $(".excelMainTable tr:eq(36)").removeClass("edesign_hide");
             $(".excelMainTable tr:eq(37)").removeClass("edesign_hide");
             $("#detailDiv_5").removeClass("edesign_hide");//住宿需求表
+            $("#detailDiv_5 tr").removeClass("edesign_hide");//住宿需求表
         }
         if($("#field"+pc).val()==1){
 
@@ -277,6 +309,7 @@
             $(".excelMainTable tr:eq(39)").removeClass("edesign_hide");
             $(".excelMainTable tr:eq(40)").removeClass("edesign_hide");
             $("#detailDiv_2").removeClass("edesign_hide");//派车接表
+            $("#detailDiv_2 tr").removeClass("edesign_hide");//派车接表
 
             $(".excelMainTable tr:eq(41)").removeClass("edesign_hide");
             $(".excelMainTable tr:eq(42)").removeClass("edesign_hide");
@@ -287,14 +320,19 @@
             $(".excelMainTable tr:eq(47)").removeClass("edesign_hide");
             $(".excelMainTable tr:eq(48)").removeClass("edesign_hide");
             $(".excelMainTable tr:eq(49)").removeClass("edesign_hide");
+            // $(".excelMainTable tr:eq(50)").removeClass("edesign_hide");
+            // $(".excelMainTable tr:eq(51)").removeClass("edesign_hide");
 
             $("#detailDiv_3").removeClass("edesign_hide");//派车送表
+            $("#detailDiv_3 tr").removeClass("edesign_hide");//派车送表
         }
         if($("#field"+qt).val()==1){
+
             $(".excelMainTable tr:eq(50)").removeClass("edesign_hide");
             $(".excelMainTable tr:eq(51)").removeClass("edesign_hide");
             $(".excelMainTable tr:eq(52)").removeClass("edesign_hide");
             $("#detailDiv_0").removeClass("edesign_hide");//礼品表
+            $("#detailDiv_0 tr").removeClass("edesign_hide");//礼品表
 
             $(".excelMainTable tr:eq(53)").removeClass("edesign_hide");
             $(".excelMainTable tr:eq(54)").removeClass("edesign_hide");
@@ -303,6 +341,13 @@
             $(".excelMainTable tr:eq(57)").removeClass("edesign_hide");
             $(".excelMainTable tr:eq(58)").removeClass("edesign_hide");
             $(".excelMainTable tr:eq(59)").removeClass("edesign_hide");
+            $(".excelMainTable tr:eq(60)").removeClass("edesign_hide");
+            $(".excelMainTable tr:eq(61)").removeClass("edesign_hide");
+            $(".excelMainTable tr:eq(62)").removeClass("edesign_hide");
+            $(".excelMainTable tr:eq(63)").removeClass("edesign_hide");
+            $(".excelMainTable tr:eq(64)").removeClass("edesign_hide");
+            $(".excelMainTable tr:eq(65)").removeClass("edesign_hide");
+            $(".excelMainTable tr:eq(66)").removeClass("edesign_hide");
         }
     }
 
