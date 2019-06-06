@@ -11,8 +11,8 @@ import weaver.interfaces.workflow.action.BaseAction;
 import weaver.soa.workflow.request.RequestInfo;
 
 /***
- * 物料主数据修改获取数据
- * @author yangc
+ * 物料主数据扩充获取数据
+ * @author CYN
  *
  */
 public class WuLiaoZhuShuJuKuoC extends BaseAction implements Action{

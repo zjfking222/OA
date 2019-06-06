@@ -41,7 +41,7 @@
 	
 	
 	//获取明细表8个字段各个的总和数据
-	String sql2 = "select SUM(cast(HSDJ as float)) HSDJ,SUM(cast(REPLACE(FKIMG, ',', '') as float)) FKIMG,SUM(cast(BHSDJ as float)) BHSDJ,SUM(cast(REPLACE(NETWR , ',', '') as float)) NETWR,SUM(cast(REPLACE(AMOUNT, ',', '') as float)) AMOUNT,SUM(cast(REPLACE(MWSBP, ',', '') as float)) MWSBP,SUM(cast(ZYBF as float)) ZYBF,SUM(cast(YLZD1 as float)) YLZD1 from formtable_main_147_dt1 where mainid = "+mainid;
+	String sql2 = "select SUM(cast(HSDJ as float)) HSDJ,SUM(cast(REPLACE(FKIMG, ',', '') as dec(18,2))) FKIMG,SUM(cast(BHSDJ as float)) BHSDJ,SUM(cast(REPLACE(NETWR , ',', '') as float)) NETWR,SUM(cast(REPLACE(AMOUNT, ',', '') as float)) AMOUNT,SUM(cast(REPLACE(MWSBP, ',', '') as float)) MWSBP,SUM(cast(ZYBF as float)) ZYBF,SUM(cast(YLZD1 as float)) YLZD1 from formtable_main_147_dt1 where mainid = "+mainid;
 	new BaseBean().writeLog("sql2=="+sql2);
 	rs2.executeSql(sql2);
 	rs2.next();

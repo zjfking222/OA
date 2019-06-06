@@ -41,6 +41,8 @@
         String sjhl=map.get("sjhl");//实际汇率
         String ysk=map.get("ysk");//应收款
         String yqk=map.get("yqk");//逾期款
+        String wllxZ=map.get("wllx");//物料类型
+        String wllxmZ=map.get("wllxm");//物料类型码
 
 
         map1 = CommonUtil.getFieldId(formid, "1");//明细1
@@ -49,6 +51,8 @@
         String gg = map1.get("gg");//规格
         String wlms =map1.get("wlms");//物料描述
         String khbm =map1.get("cpbh");//客户编号
+        String wllxX =map1.get("wllx");//物料类型码
+        String wllxmX =map1.get("wllxm");//物料类型码
 
 
 %>
@@ -86,6 +90,8 @@
     var sjhl='<%=sjhl%>';//实际汇率
     var ysk='<%=ysk%>';//应收款
     var yqk='<%=yqk%>';//逾期款
+    var wllx='<%=wllxZ%>';//物料类型
+    var wllxmZ='<%=wllxmZ%>';//物料类型码
 
 
 
@@ -97,6 +103,8 @@
     var gg = '<%=gg%>';//规格
     var wlms = '<%=wlms%>';//物料描述
     var khbm = '<%=khbm%>';//客户编码
+    var wllxX='<%=wllxX%>';//物料类型
+    var wllxmX = '<%=wllxmX%>';//物料类型码
 
 
     jQuery(function(){
@@ -106,6 +114,23 @@
 
 
     function bindchange(){
+
+        jQuery("#field" +wllx).bindPropertyChange(function () {
+            var lxvaule = jQuery("#field" + wllx).val();
+
+            if (lxvaule === "1") {
+                var wllxV = "5CP";
+            } else if (lxvaule === "2") {
+                var wllxV = "4BCP";
+            } else if (lxvaule === "3") {
+                var wllxV = "2FL";
+            } else if (lxvaule === "4") {
+                var wllxV = "3YCL";
+            }
+            setFMVal(wllxmZ, wllxV);
+
+        });
+
         jQuery("#field"+wlbmz).bindPropertyChange(function(){//物料描述
             // alert("物料描述"+wlmsz);
             var ret=jQuery("#field"+wlmsz).val().split("\\");
@@ -190,17 +215,16 @@
                 setFMVal(zje,((jQuery("#field"+cpUSD).val()*jQuery("#field"+sl).val())/10000).toFixed(2)+'万美元');//国外总金额
             }
         });
-        jQuery("#field"+gc).bindPropertyChange(function(){//工厂
-            var khbm1 = jQuery("#field"+khbm+"_0").val();
-            var gc1 = jQuery("#field"+gc+"span").text();
-            // alert("gc"+gc1+"khbm"+khbm1);
-            setDetailData(gc1,khbm1);
-        });
+        // jQuery("#field"+gc).bindPropertyChange(function(){//工厂
+        //     var khbm1 = jQuery("#field"+khbm+"_0").val();
+        //     // alert("gc"+gc1+"khbm"+khbm1);
+        //     setDetailData(gc1,khbm1);
+        // });
 
     }
 
 
-    jQuery(".excelDetailTable tr td:nth-child(4) button").live("click", function () {//物料描述
+    jQuery(".excelDetailTable tr td:nth-child(5) button").live("click", function () {//物料描述
 
         var lineId = $(this).attr("id").split("_")[1];
 
@@ -228,16 +252,81 @@
 
     });
 
+    jQuery(".excelDetailTable tr td:nth-child(4) button").live("click", function () {//物料类型
+
+        var lineId = $(this).attr("id").split("_")[1];
+
+
+        if (jQuery("#field"+wllxX+"_"+ lineId).attr("flag") === undefined &&
+            jQuery("#field"+wllxX+"_"+ lineId).attr("flag") !== "true") {
+
+
+
+            jQuery("#field"+wllxX+"_"+ lineId).bindPropertyChange(function () {//物料类型码转变
+
+
+                if (jQuery("#field" + wllxX + "_" + lineId).val() == "")
+                    return;
+
+                var ret=jQuery("#field"+wllxX +"_"+ lineId).val();
+                if (ret === "1") {
+                    var wllxV = "5CP";
+                } else if (ret === "2") {
+                    var wllxV = "4BCP";
+                } else if (ret === "3") {
+                    var wllxV = "2FL";
+                } else if (ret === "4") {
+                    var wllxV = "3YCL";
+                }
+
+                // jQuery("#field" + wllxmX + "_" + lineId + "span").text(wllxV);//赋值产品名称
+                jQuery("#field" + wllxmX + "_" + lineId).val(wllxV);
+                //
+                // // jQuery("#field" + gg + "_" + lineId + "span").text(ret[1]);//赋值规格
+                // jQuery("#field" + gg + "_" + lineId).val(ret[1]);
+
+            });
+            jQuery("#field"+wlms +"_"+ lineId).attr("_flag","true");
+        }
+
+    });
+
+    jQuery(".excelDetailTable tr td:nth-child(3) button").live("click", function () {//客户编码
+
+
+        var lineId = $(this).attr("id").split("_")[1];
+
+        // alert(lineId);
+        if (jQuery("#field"+khbm +"_"+ lineId).attr("flag") === undefined &&
+            jQuery("#field"+khbm +"_"+ lineId).attr("flag") !== "true") {
+
+
+            jQuery("#field"+khbm+"_0").bindPropertyChange(function () {//客户编码值转变
+
+                if (jQuery("#field" + khbm + "_0").val() == "")
+                    return;
+
+                var ret=jQuery("#field"+khbm +"_0").val();
+                // alert("ret "+ret);
+
+                setDetailData(ret);
+
+            });
+            jQuery("#field"+wlms +"_"+ lineId).attr("_flag","true");
+        }
+
+    });
+
 
     //添加数据
-    function setDetailData(gc,khbm){
-        if(gc===''||khbm===''){
+    function setDetailData(khbm){
+        if(khbm===''){
 
         }else{
             jQuery.ajax({
                 url:"/workflow/request/GetSAPDataAjax861.jsp",
                 type:"post",
-                data:{"gc":gc,"khbm":khbm},
+                data:{"khbm":khbm},
                 async: true,
                 success:function(data){
                     var mes=eval('('+data+')');

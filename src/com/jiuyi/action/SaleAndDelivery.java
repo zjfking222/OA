@@ -38,7 +38,10 @@ public class SaleAndDelivery {
 	             info.setWorkflowid(PropUtil.SaleAndDelivery);// 发起销售发货流程
 	             info.setRequestlevel("0");// 紧急程度
 	             info.setRemindtype("0");// 提醒类型
-	             if(sm.getBURKS().equals("1020")){
+				 boolean test1=sm.getZCQTS().equals("0");
+				 boolean test2="01".equals(sm.getSplx());
+				 new BaseBean().writeLog("test1"+test1+"test2"+test2);
+	             if(sm.getBURKS().equals("1020")||("01".equals(sm.getSplx())&&sm.getZCQTS().equals("0"))){
 	            	 info.setIsNextFlow("0");// 是否提交到下一节点 1提交到下一节点 0停留在创建节点
 	             }else{
 	            	 info.setIsNextFlow("1");// 是否提交到下一节点 1提交到下一节点 0停留在创建节点

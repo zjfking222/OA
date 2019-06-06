@@ -165,7 +165,7 @@
                     var syxss=parseFloat(ssValue)*2 +parseFloat(obj.shengyxss);
                     // alert(parseFloat(ssValue)*2);
                     // alert(jQuery("#field"+leix).val());
-                    if(jQuery("#field"+leix).val()==10){
+                    if(jQuery("#field"+leix).val()==10||jQuery("#field"+leix).val()==4){
                         setFMVal(shengyxss,syxss);//剩余小时数
                     }else{
                         setFMVal(shengyxss,obj.shengyxss);//剩余小时数

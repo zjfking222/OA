@@ -182,6 +182,15 @@ public class TransUtil {
 		return name;
 	}
 	/**
+	 * 请假流程 类型华金（下拉框）转换
+	 * @param value
+	 * @return name
+	 */
+	public static String getHjlx(String value){
+		String name=JiuyiUtil.getSelectname(value,"11931");
+		return name;
+	}
+	/**
 	 * 	物料停用 类型（check框）转换
 	 * @param value
 	 * @return name
@@ -236,8 +245,11 @@ public class TransUtil {
 	 */
 	public static String getSsqss(String value){
 		String name=JiuyiUtil.getSelectname(value,"9035");
-		name = name.substring(0,4);
-		return name;
+		if (!name.equals("")){
+			return name.substring(0,4);
+		}else {
+			return "";
+		}
 	}
 	/**
 	 * 物料主数据 价格控制（下拉框）转换

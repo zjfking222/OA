@@ -47,7 +47,7 @@ public class WuLiaoZhuShuJuCjBmpd  extends BaseAction implements Action {
 			rs2.next();
 			int mainid = rs2.getInt("id");
 			
-			String sql = "select MATNR,MAKTX from "+tablename+"_dt1 where mainid="+mainid;
+			String sql = "select MATNR,MAKTX from "+tablename+"_dt1 where mainid="+mainid+" and (cjjg is null or cjjg='')";
 			new BaseBean().writeLog("sql=="+sql);
 			rs.executeSql(sql);
 			while(rs.next()){

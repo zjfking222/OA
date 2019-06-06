@@ -23,17 +23,16 @@
         JSONObject dt1Obj = new JSONObject();
 
 
-        String gc = Util.null2String(request.getParameter("gc"));//工厂
         String khbm = Util.null2String(request.getParameter("khbm"));//客户编码
-        new BaseBean().writeLog("gc:"+gc);
         new BaseBean().writeLog("khbm:"+khbm);
         myConnection.connect();
         JCO.Repository myRepository = new JCO.Repository("Repository",myConnection);
         IFunctionTemplate ft = myRepository.getFunctionTemplate("ZSD_OE020_GET_OVERDUE"); //SAP函数
         JCO.Function bapi = ft.getFunction();
         JCO.ParameterList input = bapi.getImportParameterList(); //输入参数
-        input.setValue(khbm, "KUNNR");//工厂
-        input.setValue(gc, "WERKS");//客户编码
+        new BaseBean().writeLog("khbm==="+khbm);
+        input.setValue(khbm, "KUNNR");//客户编码
+
         myConnection.execute(bapi);
 
         JCO.ParameterList output = bapi.getExportParameterList(); //输出参数

@@ -41,8 +41,8 @@ public class InsertSellMXSql {
 			String ZYKPSL;//已申请开票数量
 			String ZWKPSL;//未申请开票数量
 			String SORT1;//客户简称
-			String ZHXMBY1;//行项目备用
-			String ZHXMBY2;//行项目备用
+			String ZHXMBY1;//税收分类
+			String ZHXMBY2;//税收分类描述
 			String ZHXMBY3;//行项目备用
 			String ZHXMBY4;//行项目备用
 			String ZHXMBY5;//行项目备用
@@ -77,7 +77,7 @@ public class InsertSellMXSql {
 					sql = "insert into " + tablename + "_dt1 " +
 							"(mainid,POSNR,MATNR,MAKTX,MEINS,GROES,ZDWMS,FKIMG,NETWR,ZZSSL,MWSBP,BHSDJ,HSDJ,AMOUNT,ZYBF,BB,YLZD1,YLZD2,ZHXMBY1,ZHXMBY2,ZHXMBY3,ZHXMBY4,ZHXMBY5,ZYKPSL,ZWKPSL) " +
 							"values ('"+mainid+"','"+POSNR+"','"+MATNR+"','"+MAKTX+"','"+MEINS+"','"+GROES+"','"+ZDWMS+"','"+JiuyiUtil.getQfw(Double.parseDouble(FKIMG))+"'" +
-									",'"+JiuyiUtil.getQfw(Double.parseDouble(NETWR))+"','"+ZZSSL+"','"+JiuyiUtil.getQfw(Double.parseDouble(MWSBP))+"','"+BHSDJ+"','"+HSDJ+"','"+JiuyiUtil.getQfw(Double.parseDouble(AMOUNT))+"','"+ZYBF+"','"+BB+"','"+YLZD1+"','"+YLZD2+"','"+0.0+"','"+0.0+"','"+0.0+"','"+0.0+"','"+0.0+"','"+ZYKPSL+"','"+ZWKPSL+"')";
+									",'"+JiuyiUtil.getQfw(Double.parseDouble(NETWR))+"','"+ZZSSL+"','"+JiuyiUtil.getQfw(Double.parseDouble(MWSBP))+"','"+BHSDJ+"','"+HSDJ+"','"+JiuyiUtil.getQfw(Double.parseDouble(AMOUNT))+"','"+ZYBF+"','"+BB+"','"+YLZD1+"','"+YLZD2+"','"+ZHXMBY1+"','"+ZHXMBY2+"','"+0.0+"','"+0.0+"','"+0.0+"','"+ZYKPSL+"','"+ZWKPSL+"')";
 					new BaseBean().writeLog("插入明细sql:"+sql);
 					rs.execute(sql);
 				}

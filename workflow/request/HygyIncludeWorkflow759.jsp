@@ -14,9 +14,12 @@
 %>
 <script type="text/javascript" src="wui/common/jquery/jquery.min_wev8.js"></script>
 <script type="text/javascript">
-    //MM-车间成品领料
     /*****************主表********************/
-
+    /**
+     * MM-车间成品领料
+     * @author CYN
+     *
+     */
     var wllx = '<%=wllx%>';//物料类型
     var lx = '<%=lx%>';//类型
     var WERKS = '<%=WERKS%>';//工厂

@@ -20,7 +20,6 @@
 <jsp:useBean id="SAPUtil" class="com.jiuyi.util.SAPUtil" scope="page" />
 <jsp:useBean id="BigDecimalUtil" class="com.jiuyi.util.BigDecimalUtil"
 	scope="page" />
-
 <%
 	//货源清单
 	response.setHeader("cache-control", "no-cache");
@@ -68,12 +67,16 @@
 			JCO.ParameterList Table00 = function.getTableParameterList();//输出表的处理 
 			JCO.Table T_OUTBOUND01 = Table00.getTable("T_OUTBOUND01");//明细1信息
 			JCO.Table T_OUTBOUND02 = Table00.getTable("T_OUTBOUND02");//明细2信息
+			new BaseBean().writeLog("T_OUTBOUND01==="+T_OUTBOUND01);
+			new BaseBean().writeLog("T_OUTBOUND02==="+T_OUTBOUND02);
 			String fpfkfph = "";
 			ArrayList<String> belnrlist = new ArrayList<String>();
+			new BaseBean().writeLog("T_OUTBOUND01.getNumRows()==========" + T_OUTBOUND01.getNumRows());
 			for (int i = 0; i < T_OUTBOUND01.getNumRows(); i++) {
 				T_OUTBOUND01.setRow(i);
 				KOINH = T_OUTBOUND01.getString("KOINH");
 				ZBANKN = T_OUTBOUND01.getString("ZBANKN");
+				new BaseBean().writeLog("KOINH==="+KOINH);
 				String BELNR = T_OUTBOUND01.getString("BELNR");
 				String GJAHR = T_OUTBOUND01.getString("GJAHR");
 				double ZFPJE = T_OUTBOUND01.getDouble("ZFPJE");
@@ -120,7 +123,16 @@
 				String mm = ZDQRI.replace("-", "").substring(0, 6);
 
 				new BaseBean().writeLog("tjrq=" + tjrq + " ZDQRI=" + ZDQRI);
+				boolean test=(tjrq.compareTo(ZDQRI) > 0 || tjrq.compareTo(ZDQRI) == 0 || mm.equals(MM));
+				new BaseBean().writeLog("到期日与提交日期的判断"+test);
 				new BaseBean().writeLog("MM=" + MM + " mm=" + mm);
+				boolean test2=yingfje > 0;
+				new BaseBean().writeLog("应付金额大于0"+test2);
+				new BaseBean().writeLog("ZFPJE=" + ZFPJE + " ysqje=" + ysqje+"yifje"+yifje);
+				boolean test3=ZFPJE-ysqje-yifje>0;
+				new BaseBean().writeLog("发票金额-应付金额-已付金额>0"+test3);
+				boolean test4=ywyxm.equals(mxywyxm);
+				new BaseBean().writeLog("sap业务员姓名"+mxywyxm+"oa业务员姓名"+ywyxm+"条件结果"+test4);
 				//&& ZFPJE-ysqje-yifje>0
 				boolean flag = (tjrq.compareTo(ZDQRI) > 0 || tjrq.compareTo(ZDQRI) == 0 || mm.equals(MM)) && yingfje > 0 && ZFPJE-ysqje-yifje>0
 						&& ywyxm.equals(mxywyxm);
