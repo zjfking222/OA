@@ -816,11 +816,13 @@ public class JiuyiUtil {
 	 */
 	public static String getSelectname(String str,String fieldid){
 		RecordSet rs = new RecordSet();
-		String sql="select * from workflow_selectitem where fieldid="+fieldid+" and selectvalue="+str;
-		rs.executeSql(sql);
-		if(rs.next()){
-			return rs.getString("selectname");
-		}
+		if(!str.equals("")&&str != null){
+            String sql="select * from workflow_selectitem where fieldid="+fieldid+" and selectvalue="+str;
+            rs.execute(sql);
+            if(rs.next()){
+                return rs.getString("selectname");
+            }
+        }
 		return "";
 	} 
 	

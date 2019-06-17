@@ -245,7 +245,7 @@ public class TransUtil {
 	 */
 	public static String getSsqss(String value){
 		String name=JiuyiUtil.getSelectname(value,"9035");
-		if (!name.equals("")){
+		if (!name.equals("")&&name != null){
 			return name.substring(0,4);
 		}else {
 			return "";

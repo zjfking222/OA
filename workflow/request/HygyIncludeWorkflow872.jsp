@@ -2,21 +2,16 @@
 <%@page import="com.jiuyi.util.CommonUtil" %>
 <%@page import="weaver.general.*" %>
 <%@page import="java.util.*" %>
-<%@page import="com.jiuyi.util.JiuyiUtil" %>
 <%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-%>
-<%
+    new BaseBean().writeLog("开始执行jsp");
     int formid = Util.getIntValue(request.getParameter("formid"));
     Map<String, String> map;
+
 
     if (formid != -1) {
         map = CommonUtil.getFieldId(formid, "0");//主表数据
         String zbgc = map.get("factory");//主表工厂
         String jksb = map.get("jksb");//进口设备
-
-
 
 %>
 <script type="text/javascript" src="wui/common/jquery/jquery.min_wev8.js"></script>
@@ -30,6 +25,7 @@
 
     var zbgc = '<%=zbgc%>';//主表工厂
     var jksb = '<%=jksb%>';//进口设备
+
     jQuery("#field"+jksb).addClass("edesign_hide");
 
     jQuery("#field" +<%=zbgc%>).bindPropertyChange(function () {
