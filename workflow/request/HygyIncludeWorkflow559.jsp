@@ -1,39 +1,41 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
-<%@page import="weaver.general.*" %>
-<%@page import="java.util.*" %>
-<%@page import="com.jiuyi.util.JiuyiUtil" %>
+<%@page import="com.jiuyi.util.CommonUtil"%>
+<%@page import="weaver.general.*"%>
+<%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8"%>
+<jsp:useBean id="rs" class="weaver.conn.RecordSet" scope="page" />
 <%
 int formid=Util.getIntValue(request.getParameter("formid"));
-Map map = new HashMap();
-if(formid!=-1){
-map =JiuyiUtil.getFieldId(formid,"0");//主表数据
-String lx =  map.get("lx").toString();//类型
-String wllx =  map.get("wllx").toString();//物料类型
-String WERKS =  map.get("werks").toString();//工厂
-String KOSTL =  map.get("kostl").toString();//成本中心
-String YDLX =  map.get("ydlx").toString();//移动类型
-String AUFNR =  map.get("aufnr").toString();//内部订单
-String SAP =  map.get("sap").toString();//是否SAP发起
- 
+    HashMap<String, String> map=CommonUtil.getFieldId(formid, "0");//主表数据
+    String lx =  map.get("lx");//类型
+    String wllx =  map.get("wllx");//物料类型
+    String WERKS =  map.get("werks");//工厂
+    String KOSTL =  map.get("kostl");//成本中心
+    String YDLX =  map.get("ydlx");//移动类型
+    String AUFNR =  map.get("aufnr");//内部订单
+    String SAP =  map.get("sap");//是否SAP发起
+
+    HashMap<String, String> map1=CommonUtil.getFieldId(formid, "1");//明细数据
+    String MATNR=map1.get("matnr");//物料编码
+    String LGPBE=map1.get("lgpbe");//仓位
 
 %>
 <script type="text/javascript" src="wui/common/jquery/jquery.min_wev8.js"></script>
 <script type="text/javascript">
-//MM-其他领料
-/*****************主表********************/
+    //MM-其他领料
+    /*****************主表********************/
 
-var wllx = '<%=wllx%>';//物料类型
-var lx = '<%=lx%>';//类型
-var WERKS = '<%=WERKS%>';//工厂
-var KOSTL = '<%=KOSTL%>';//成本中心
-var YDLX = '<%=YDLX%>';//移动类型
-var AUFNR = '<%=AUFNR%>';//内部订单
-var SAP = '<%=SAP%>';//是否SAP发起
+    var wllx = '<%=wllx%>';//物料类型
+    var lx = '<%=lx%>';//类型
+    var WERKS = '<%=WERKS%>';//工厂
+    var KOSTL = '<%=KOSTL%>';//成本中心
+    var YDLX = '<%=YDLX%>';//移动类型
+    var AUFNR = '<%=AUFNR%>';//内部订单
+    var SAP = '<%=SAP%>';//是否SAP发起
 
+    /*****************明细表********************/
+    var MATNR='<%=MATNR%>';//物料编码
+    var LGPBE='<%=LGPBE%>';//仓位
 
-
-
-var sfsap = jQuery("#field"+SAP).val();
+    var sfsap = jQuery("#field"+SAP).val();
 	//隐藏申请人姓名所在行
 	setFMVal(wllx,"1WZ");
 	jQuery("#field"+<%=lx%>).bindPropertyChange(function(){
@@ -46,8 +48,7 @@ var sfsap = jQuery("#field"+SAP).val();
 		
 		setFMVal(wllx,wllxvalue);
 	})
-	
-	
+
 	if(sfsap!="0"){
 		
 	jQuery("#field"+<%=WERKS%>).bindPropertyChange(function(){//工厂
@@ -71,10 +72,51 @@ var sfsap = jQuery("#field"+SAP).val();
 	})
 	
 	}
-	
-	
-	
-	function deleteRow(groupid){
+
+
+	//物料编码改变，对仓位进行清空后赋值
+    jQuery(".excelDetailTable tr td:nth-child(7) button").live("click", function () {//物料编码浏览按钮
+        var lineId = $(this).attr("id").split("_")[1];
+        jQuery("#field8859_" + lineId).bindPropertyChange(function () {//物料编码
+            jQuery("#field" + LGPBE + "_" + lineId + "span").text("");//对仓位进行清空操作
+            jQuery("#field" + LGPBE + "_" + lineId).val("");
+            var WERKS1 = jQuery("#field"+WERKS).val();
+            var MATNR1 = jQuery("#field"+MATNR+ "_" + lineId+"span").text();
+
+            setDetailData(WERKS1,MATNR1,lineId);
+
+        });
+    });
+
+    //添加数据
+    function setDetailData(WERKS,MATNR,lineId){
+
+        if(WERKS===''||MATNR===''){
+
+        }else{
+            jQuery.ajax({
+                url:"/workflow/request/GetSAPDataAjax559.jsp",
+                type:"post",
+                data:{"WERKS":WERKS,"MATNR":MATNR},
+                async: true,
+                success:function(data){
+
+                    var mes=eval('('+data+')');
+                    //eval("var obj="+data);
+                    var dt1Data=mes.dt1;
+                    jQuery("#field" + LGPBE + "_" + lineId).val(dt1Data[0].LGPBE);
+
+                },
+                error:function(e){
+                    console.log(e);
+                    alert("错误"+e);
+                }
+            });
+        }
+
+    }
+
+    function deleteRow(groupid){
 		if(jQuery('#indexnum'+groupid).val()>0){
 			try{
 				jQuery("input[type='checkbox'][name='check_node_"+groupid+"']").each(function(){
@@ -172,4 +214,3 @@ var sfsap = jQuery("#field"+SAP).val();
 	}
 	
 </script>
-<%}%>
