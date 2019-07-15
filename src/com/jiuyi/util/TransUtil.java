@@ -187,7 +187,7 @@ public class TransUtil {
 	 * @return name
 	 */
 	public static String getHjlx(String value){
-		String name=JiuyiUtil.getSelectname(value,"11931");
+		String name=JiuyiUtil.getSelectname(value,"15737");//²âÊÔ»ú16026
 		return name;
 	}
 	/**
