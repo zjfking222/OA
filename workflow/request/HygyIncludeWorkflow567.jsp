@@ -14,8 +14,8 @@
 	Map map = new HashMap();
 	if(formid!=-1){
 	map =JiuyiUtil.getFieldId(formid,"0");//主表数据
-	String wzhth = map.get("gc").toString();//外证合同号
-	String nzhth = map.get("gc1").toString();//内证合同号
+	String wzhth = map.get("hth").toString();//外证合同号
+	String nzhth = map.get("hth1").toString();//内证合同号
 	String wzgongys = map.get("gongys").toString();//外证供应商
 	String nzgongys = map.get("gongys1").toString();//内证供应商
 	map =JiuyiUtil.getFieldId(formid,"1");//外证明细表数据
@@ -173,16 +173,16 @@ jQuery(document).ready(function(){
 });
 
 function getWzsl(){
-	 var gc = jQuery("#field"+wzhth).val();//合同号=外证合同号
+	 var hth = jQuery("#field"+wzhth).val();//合同号=外证合同号
 	 var gongys = jQuery("#field"+wzgongys).val();//供应商=外证供应商
-     if(gc==""){
+     if(hth==""){
      	return;
      }else{
     	jQuery.ajax({
      		url:"/workflow/request/GetSAPDataAjax567.jsp",
    	 		async:false,
    	 		type:"post",
-   	 		data:{"operation":"htxx","gc":gc,"gongys":gongys},
+   	 		data:{"operation":"htxx","hth":hth,"gongys":gongys},
    	 		success:function(data){
    	 			eval("var obj="+data);
    	 			deleteRow(0);
@@ -268,16 +268,16 @@ function getWzsl(){
      }
 }
 function getNzsl(){
-	var gc = jQuery("#field"+nzhth).val();
+	var hth = jQuery("#field"+nzhth).val();
 	var gongys = jQuery("#field"+nzgongys).val();
-    if(gc==""){
+    if(hth==""){
     	return;
     }else{
    		jQuery.ajax({
     		url:"/workflow/request/GetSAPDataAjax567.jsp",
   	 		async:false,
   	 		type:"post",
-  	 		data:{"operation":"htxx","gc":gc,"gongys":gongys},
+  	 		data:{"operation":"htxx","hth":hth,"gongys":gongys},
   	 		success:function(data){
   	 			eval("var obj="+data);
   	 			deleteRow(1);
