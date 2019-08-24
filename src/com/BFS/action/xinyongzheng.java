@@ -29,14 +29,11 @@ public class xinyongzheng implements Action {
         int userid = requestInfo.getRequestManager().getUserId();//获取当前操作用户对象
         new BaseBean().writeLog("user==="+userid);
 
-        RecordSet rs0=new RecordSet();
-        String sql0="select lastname from hrmresource where id="+userid;
-        rs0.execute(sql0);
-        rs0.next();
-        String username=rs0.getString(1);
         //取主表
         String tablename = SAPUtil.getTablename(requestInfo);//表名
         RecordSet rs1 = new RecordSet();
+        RecordSet rs2 = new RecordSet();
+        RecordSet rs3 = new RecordSet();
         //查询主表数据
         String sql = "select * from " + tablename + " where requestid=" + requestid;
         new BaseAction().writeLog("sql==" + sql);
@@ -49,6 +46,8 @@ public class xinyongzheng implements Action {
 
         int kzlx=rs1.getInt("kzlx");//开证类型
         new BaseBean().writeLog ("kzlx"+kzlx);
+        String nzcg=rs1.getString("nzcg");//内证成功
+        String wzcg=rs1.getString("wzcg");//外证成功
 
         //公有
         String hth=rs1.getString("hth");//合同号
@@ -169,7 +168,7 @@ public class xinyongzheng implements Action {
         jsonObjn.put("ISSUING_DATE",nkzrq);
         jsonObjn.put("EXPIRY_DATE",ndqrq);
         jsonObjn.put("ISSUING_CUR_ID",nbb);
-        jsonObjn.put("LC_INTER",0);
+        jsonObjn.put("LC_INTER",1);
 
         jsonArrn.add(jsonObjn);
         dataObjn.put("LC_ENROL_INFO",jsonArrn);
@@ -199,73 +198,98 @@ public class xinyongzheng implements Action {
 
         new BaseBean().writeLog("信用证外证==="+dataStringw);
 
-        new BaseBean().writeLog("开始调用信用证webservice");
-        //连接BFS数据库
-
         try{
-
             if (kzlx==0){
-                new BaseBean().writeLog("传入内证参数"+dataStringn);
-                HygyLCEnrolWebService factor=new HygyLCEnrolWebService();
-                HygyLCEnrolWebServicePortType LCEnrolPortType=factor.getHygyLCEnrolWebServiceHttpSoap11Endpoint();
-                String resultn=LCEnrolPortType.erpLCEnrolData(dataStringn);
-                JSONObject resultobjn= JSONObject.parseObject(resultn);
-                new BaseAction().writeLog("resultn==" + resultn);
-                JSONArray messageArrn=resultobjn.getJSONArray("LC_ENROL_INFO");
-                String statusn=messageArrn.getJSONObject(0).getString("STATUS");
-                new BaseBean().writeLog("STATUS"+statusn);
-                if(statusn.equals("F")){
-                    requestInfo.getRequestManager().setMessage("111100");//提醒信息id
-                    String message=messageArrn.getJSONObject(0).getString("MESSAGE");
-                    requestInfo.getRequestManager().setMessagecontent("内证传输出错：" + message);//提醒信息内容
+                new BaseBean().writeLog("内外证都存在情况");
+                new BaseBean().writeLog("nzcg==="+nzcg+"wzcg==="+wzcg);
+                if (!nzcg.equals("S")){
+                    JSONArray messageArrn=executeBFS(dataStringn);
+                    String statusn=messageArrn.getJSONObject(0).getString("STATUS");
+                    new BaseBean().writeLog("STATUSn"+statusn);
+                    String sqln="update "+tablename+" set nzcg='S' " +
+                            "where requestid='"+requestid+"'";//创建成功=1
+                    if (statusn.equals("S")){
+                        rs2.execute(sqln);
+                    }else {
+                        String message=messageArrn.getJSONObject(0).getString("MESSAGE");
+                        requestInfo.getRequestManager().setMessagecontent("内证传输出错：" + message);//提醒信息内容
+                        return "0";
+                    }
+                    JSONArray messageArrw=executeBFS(dataStringw);
+                    String statusw=messageArrw.getJSONObject(0).getString("STATUS");
+                    new BaseBean().writeLog("STATUSw"+statusw);
+                    String sqlw="update "+tablename+" set wzcg='S' " +
+                            "where requestid='"+requestid+"'";//创建成功=1
+                    if (statusw.equals("S")){
+                        rs3.execute(sqlw);
+                    }else {
+                        String message=messageArrw.getJSONObject(0).getString("MESSAGE");
+                        requestInfo.getRequestManager().setMessagecontent("外证传输出错：" + message);//提醒信息内容
+                        return "0";
+                    }
+
+                }else if (!wzcg.equals("S")){
+                    JSONArray messageArrw=executeBFS(dataStringw);
+                    String statusw=messageArrw.getJSONObject(0).getString("STATUS");
+                    new BaseBean().writeLog("STATUSw"+statusw);
+                    String sqlw="update "+tablename+" set wzcg='S' " +
+                            "where requestid='"+requestid+"'";//创建成功=1
+                    if (statusw.equals("S")){
+                        rs3.execute(sqlw);
+                    }else {
+                        String message=messageArrw.getJSONObject(0).getString("MESSAGE");
+                        requestInfo.getRequestManager().setMessagecontent("外证传输出错：" + message);//提醒信息内容
+                        return "0";
+                    }
+                }else{
+                    requestInfo.getRequestManager().setMessagecontent("原流程已提交成功，请重新申请流程！");//提醒信息内容
+                    return "0";
+                }
+            }
+            else if (kzlx==1){//内证
+                new BaseBean().writeLog("只有内证存在情况");
+                if (!nzcg.equals("S")) {
+                    new BaseBean().writeLog("传入内证参数" + dataStringn);
+                    JSONArray messageArrn = executeBFS(dataStringn);
+                    String statusn = messageArrn.getJSONObject(0).getString("STATUS");
+                    new BaseBean().writeLog("STATUSn" + statusn);
+                    String sqln = "update " + tablename + " set nzcg='S' " +
+                            "where requestid='" + requestid + "'";//创建成功=1
+                    if (statusn.equals("S")) {
+                        rs2.execute(sqln);
+                    } else {
+                        String message = messageArrn.getJSONObject(0).getString("MESSAGE");
+                        requestInfo.getRequestManager().setMessagecontent("只存在内证，内证传输出错：" + message);//提醒信息内容
+                        return "0";
+                    }
+                }else {
+                    requestInfo.getRequestManager().setMessagecontent("原流程已提交成功，请重新申请流程！");//提醒信息内容
+                    return "0";
+                }
+            }else if (kzlx==2){//外证
+                new BaseBean().writeLog("只有外证存在情况");
+                if (!wzcg.equals("S")){
+                    new BaseBean().writeLog("传入外证参数"+dataStringw);
+                    JSONArray messageArrw=executeBFS(dataStringw);
+                    String statusw=messageArrw.getJSONObject(0).getString("STATUS");
+                    new BaseBean().writeLog("STATUSw"+statusw);
+                    String sqlw="update "+tablename+" set wzcg='S' " +
+                            "where requestid='"+requestid+"'";//创建成功=1
+                    if(statusw.equals("S")){
+                        rs3.execute(sqlw);
+                    }else {
+                        String message=messageArrw.getJSONObject(0).getString("MESSAGE");
+                        requestInfo.getRequestManager().setMessagecontent("只存在外证，外证传输出错：" + message);//提醒信息内容
+                        return "0";
+                    }
+                }else {
+                    requestInfo.getRequestManager().setMessagecontent("原流程已提交成功，请重新申请流程！");//提醒信息内容
                     return "0";
                 }
 
-                new BaseBean().writeLog("传入外证参数"+dataStringn);
-                String resultw=LCEnrolPortType.erpLCEnrolData(dataStringn);
-                JSONObject resultobjw= JSONObject.parseObject(resultw);
-                new BaseAction().writeLog("resultw==" + resultw);
-                JSONArray messageArrw=resultobjw.getJSONArray("LC_ENROL_INFO");
-                String statusw=messageArrw.getJSONObject(0).getString("STATUS");
-                new BaseBean().writeLog("STATUS"+statusw);
-                if(statusw.equals("F")){
-                    requestInfo.getRequestManager().setMessage("111100");//提醒信息id
-                    String message=messageArrw.getJSONObject(0).getString("MESSAGE");
-                    requestInfo.getRequestManager().setMessagecontent("外证传输出错：" + message);//提醒信息内容
-                    return "0";
-                }
-            }else if (kzlx==1){
-                new BaseBean().writeLog("传入内证参数"+dataStringn);
-                HygyLCEnrolWebService factor=new HygyLCEnrolWebService();
-                HygyLCEnrolWebServicePortType LCEnrolPortType=factor.getHygyLCEnrolWebServiceHttpSoap11Endpoint();
-                String resultn=LCEnrolPortType.erpLCEnrolData(dataStringn);
-                JSONObject resultobjn= JSONObject.parseObject(resultn);
-                new BaseAction().writeLog("resultn==" + resultn);
-                JSONArray messageArrn=resultobjn.getJSONArray("LC_ENROL_INFO");
-                String statusn=messageArrn.getJSONObject(0).getString("STATUS");
-                new BaseBean().writeLog("STATUS"+statusn);
-                if(statusn.equals("F")){
-                    requestInfo.getRequestManager().setMessage("111100");//提醒信息id
-                    String message=messageArrn.getJSONObject(0).getString("MESSAGE");
-                    requestInfo.getRequestManager().setMessagecontent("内证传输出错：" + message);//提醒信息内容
-                    return "0";
-                }
-            }else if (kzlx==2){
-                new BaseBean().writeLog("传入外证参数"+dataStringn);
-                HygyLCEnrolWebService factor=new HygyLCEnrolWebService();
-                HygyLCEnrolWebServicePortType LCEnrolPortType=factor.getHygyLCEnrolWebServiceHttpSoap11Endpoint();
-                String resultw=LCEnrolPortType.erpLCEnrolData(dataStringn);
-                JSONObject resultobjw= JSONObject.parseObject(resultw);
-                new BaseAction().writeLog("resultw==" + resultw);
-                JSONArray messageArrw=resultobjw.getJSONArray("LC_ENROL_INFO");
-                String statusw=messageArrw.getJSONObject(0).getString("STATUS");
-                new BaseBean().writeLog("STATUS"+statusw);
-                if(statusw.equals("F")){
-                    requestInfo.getRequestManager().setMessage("111100");//提醒信息id
-                    String message=messageArrw.getJSONObject(0).getString("MESSAGE");
-                    requestInfo.getRequestManager().setMessagecontent("外证传输出错：" + message);//提醒信息内容
-                    return "0";
-                }
+            }else {
+                requestInfo.getRequestManager().setMessagecontent("请选择信用证类型");//提醒信息内容
+                return "0";
             }
 
 
@@ -277,5 +301,16 @@ public class xinyongzheng implements Action {
 
         }
         return Action.SUCCESS;
+    }
+    public JSONArray executeBFS(String dataString){
+        new BaseBean().writeLog("开始调用信用证webservice");
+        //连接BFS数据库
+        HygyLCEnrolWebService factor=new HygyLCEnrolWebService();
+        HygyLCEnrolWebServicePortType LCEnrolPortType=factor.getHygyLCEnrolWebServiceHttpSoap11Endpoint();
+        String result=LCEnrolPortType.erpLCEnrolData(dataString);
+        JSONObject resultobj= JSONObject.parseObject(result);
+        new BaseAction().writeLog("result==" + result);
+        JSONArray messageArr=resultobj.getJSONArray("LC_ENROL_INFO");
+        return messageArr;
     }
 }

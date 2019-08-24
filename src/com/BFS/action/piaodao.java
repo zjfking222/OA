@@ -64,6 +64,9 @@ public class piaodao implements Action {
         JSONObject jsonObj=new JSONObject();
         JSONObject dataObj=new JSONObject();
         jsonObj.put("SERIAL_NO_ERP",lcbm);
+        if("".equals(jhbh)){
+            jhbh="0";
+        }
         jsonObj.put("DATA_SOURCE",jhbh);
         jsonObj.put("CORP_CODE",bukrs);
         jsonObj.put("OPP_BANK_ACC",khhzh);
@@ -97,7 +100,7 @@ public class piaodao implements Action {
             if(status.equals("F")){
                 requestInfo.getRequestManager().setMessage("111100");//提醒信息id
                 String message=messageArr.getJSONObject(0).getString("MESSAGE");
-                requestInfo.getRequestManager().setMessagecontent("传输出错：" + message);//提醒信息内容
+                requestInfo.getRequestManager().setMessagecontent("传输资金系统出错：" + message);//提醒信息内容
                 return "0";
             }
 
