@@ -61,9 +61,9 @@ jQuery(document).ready(function(){
 			var kzhje1usd2 = 0;//明细表2的开证总金额USD
 			var rzxsh = jQuery("#field9369").val();//融资系数
 			var kzhzje2usd = 0;//明细表2的开证总金额US
-	        var hl = jQuery("#field9361").val();//明细表1的汇率
+	        var hl = jQuery("#field9361").val();//表1人民币汇率
 	        var rzxs = jQuery("#field9362").val();//明细表1的融资系数
-	        var hl2 = jQuery("#field9368").val();//明细表2的汇率
+	        var hl2 = jQuery("#field9368").val();//明细表2的人民币汇率
 	        var rzxs2 = jQuery("#field9369").val();//明细表2的融资系数
 			
 			for (var i = 0; i < mxNum; i++) {
@@ -89,7 +89,7 @@ jQuery(document).ready(function(){
 					    usd = mt*xishu*gudj;//货值USD=数量(kg)*系数*固定价
 					    kzhje1usd = kzhje1usd+usd;
 					    jQuery("#field9265_" + i).val(usd);
-					    jQuery("#field9266_" + i).val(usd*hl*rzxs);
+					    jQuery("#field9266_" + i).val(usd*hl*rzxs);//货值RMB
 	                }
 					
 				} else {
@@ -108,15 +108,15 @@ jQuery(document).ready(function(){
 			
 			}
 
-			jQuery("#field9439").val(kzhje1usd);
-			jQuery("#field9364").val(kzhje1usd*hl*rzxs);
-			var kzzjeUSD=jQuery("#field9439").val();
-			var kzzjeRMB=jQuery("#field9364").val();
-			var hydzzje=jQuery("#field13659").val();
-			var kzzjeEUR = jQuery("#field9439").val()/ jQuery("#field13657").val();
-			jQuery("#field13655").val(kzzjeEUR);
+			jQuery("#field9439").val(kzhje1usd*rzxs);//开证总金额USD
+			jQuery("#field9364").val(kzhje1usd*hl*rzxs);//开证总金额RMB
+			var kzzjeUSD=jQuery("#field9439").val();//开证总金额USD
+			var kzzjeRMB=jQuery("#field9364").val();//开证总金额RMB
+			var hydzzje=jQuery("#field13659").val();//溢短装
+			var kzzjeEUR = jQuery("#field9439").val()/ jQuery("#field13657").val();//开证总金额EUR
+			jQuery("#field13655").val(kzzjeEUR);//开证总金额EUR
 			var ydzzje=(trim(kzzjeRMB)==0?(1+parseFloat(hydzzje))*kzzjeUSD:(1+parseFloat(hydzzje))*kzzjeRMB);
-			jQuery("#field13661").val(ydzzje);
+			jQuery("#field13661").val(ydzzje);//含溢短装总金额
 		for (var j = 0; j < mxNum2; j++) {
 			var jijia2 = jQuery("#field9337_" + j).val();//判断计价方式
 			var mt2 = jQuery("#field9338_" + j).val();//获取mt
