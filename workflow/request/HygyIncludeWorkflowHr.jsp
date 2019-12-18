@@ -175,7 +175,7 @@ function checkTime(h_ksrq,h_kssjxs,h_kssjfz,h_jsrq,h_jssjxs,h_jssjfz){
 		if(compareTime(h_ksrq+" 13:30:00",h_ksrq+" "+h_kssjxs+":"+h_kssjfz+":00")>0
 				&&compareTime(h_ksrq+" 13:30:00",h_ksrq+" "+h_jssjxs+":"+h_jssjfz+":00")>0){//都是下午
 			if(!isFifthMutiple(compareTime(h_ksrq+" "+h_kssjxs+":"+h_kssjfz+":00",h_ksrq+" "+h_jssjxs+":"+h_jssjfz+":00"))){
-				alert("时间间隔必须为15的倍数");
+				top.Dialog.alert("时间间隔必须为30的倍数");
 				return false;
 			}else{
 				return true;
@@ -183,7 +183,7 @@ function checkTime(h_ksrq,h_kssjxs,h_kssjfz,h_jsrq,h_jssjxs,h_jssjfz){
 		}else if(compareTime(h_ksrq+" 07:59:00",h_ksrq+" "+h_kssjxs+":"+h_kssjfz+":00")>0
 				&&compareTime(h_ksrq+" 07:59:00",h_ksrq+" "+h_jssjxs+":"+h_jssjfz+":00")>0){//都是上午
 			if(!isFifthMutiple(compareTime(h_ksrq+" "+h_kssjxs+":"+h_kssjfz+":00",h_ksrq+" "+h_jssjxs+":"+h_jssjfz+":00"))){
-				alert("时间间隔必须为15的倍数");
+				top.Dialog.alert("时间间隔必须为30的倍数");
 				return false;
 			}else{
 				return true;
@@ -202,7 +202,7 @@ function compareTime(startTime,endTime) {
   return thisResult;
 }
 function isFifthMutiple(number){
-	var isTen=number%15;
+	var isTen=number%30;
 		if(isTen==0){
 			return true;
 		}else{
