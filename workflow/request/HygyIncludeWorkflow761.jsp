@@ -181,7 +181,7 @@ String workflowid=Util.null2String(request.getParameter("workflowid"));
             // alert("linedata"+lineData.HB);
                 if(lineData.XYZLX==="1") {                                   //外证
                     setFMVal(xyzbh, lineData.XYZBH);//信用证编码
-                    setFMVal("9372",lineData.KZH);//开证行
+                    setFMVal("16170",lineData.KZH);//开证行
                     setFMVal("9496",lineData.KZDW);//开证单位
                     setFMVal("9498",lineData.GYS);//供应商
                     setFMVal("9487",lineData.HB);//货币
@@ -207,7 +207,7 @@ String workflowid=Util.null2String(request.getParameter("workflowid"));
                     setFMVal("13682",lineData.SDLF);//收代理方
                 }else{                                                        //内证
                     setFMVal(xyzbh1, lineData.XYZBH);//信用证编码
-                    setFMVal("9373",lineData.KZH);//开证行
+                    setFMVal("16171",lineData.KZH);//开证行
                     setFMVal("9497",lineData.KZDW);//开证单位
                     setFMVal("9499",lineData.GYS);//供应商
                     setFMVal("9488",lineData.HB);//货币
