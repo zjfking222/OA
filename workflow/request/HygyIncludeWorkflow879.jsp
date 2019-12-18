@@ -39,16 +39,15 @@
 
     jQuery(function() {
         //绑定监听
-        if(nodeid!=6796&&nodeid!=6802&&nodeid!=6805&&nodeid!=6801) {
-            $(".canyin").closest('tr').addClass("edesign_hide");//餐饮
-            $(".zhusu").closest('tr').addClass("edesign_hide");//住宿
-            $(".paiche").closest('tr').addClass("edesign_hide");//派车
-            $(".qita").closest('tr').addClass("edesign_hide");//其他
-            $(".canguan").closest('tr').addClass("edesign_hide");//参观
-            $(".yinjie").closest('tr').addClass("edesign_hide");//迎接
-            $(".huiyi").closest('tr').addClass("edesign_hide");//会议
-        }
-        if(nodeid==6803){//综合单
+        $(".canyin").closest('tr').addClass("edesign_hide");//餐饮
+        $(".zhusu").closest('tr').addClass("edesign_hide");//住宿
+        $(".paiche").closest('tr').addClass("edesign_hide");//派车
+        $(".qita").closest('tr').addClass("edesign_hide");//其他
+        $(".canguan").closest('tr').addClass("edesign_hide");//参观
+        $(".yinjie").closest('tr').addClass("edesign_hide");//迎接
+        $(".huiyi").closest('tr').addClass("edesign_hide");//会议
+
+        if(nodeid==7654||nodeid==7623){//综合单
             bindchange();//绑定监听
         }
         else {
