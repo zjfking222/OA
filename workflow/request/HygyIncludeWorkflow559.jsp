@@ -73,49 +73,6 @@ int formid=Util.getIntValue(request.getParameter("formid"));
 	
 	}
 
-
-	//物料编码改变，对仓位进行清空后赋值
-    jQuery(".excelDetailTable tr td:nth-child(7) button").live("click", function () {//物料编码浏览按钮
-        var lineId = $(this).attr("id").split("_")[1];
-        jQuery("#field8859_" + lineId).bindPropertyChange(function () {//物料编码
-            jQuery("#field" + LGPBE + "_" + lineId + "span").text("");//对仓位进行清空操作
-            jQuery("#field" + LGPBE + "_" + lineId).val("");
-            var WERKS1 = jQuery("#field"+WERKS).val();
-            var MATNR1 = jQuery("#field"+MATNR+ "_" + lineId+"span").text();
-
-            setDetailData(WERKS1,MATNR1,lineId);
-
-        });
-    });
-
-    //添加数据
-    function setDetailData(WERKS,MATNR,lineId){
-
-        if(WERKS===''||MATNR===''){
-
-        }else{
-            jQuery.ajax({
-                url:"/workflow/request/GetSAPDataAjax559.jsp",
-                type:"post",
-                data:{"WERKS":WERKS,"MATNR":MATNR},
-                async: true,
-                success:function(data){
-
-                    var mes=eval('('+data+')');
-                    //eval("var obj="+data);
-                    var dt1Data=mes.dt1;
-                    jQuery("#field" + LGPBE + "_" + lineId).val(dt1Data[0].LGPBE);
-
-                },
-                error:function(e){
-                    console.log(e);
-                    alert("错误"+e);
-                }
-            });
-        }
-
-    }
-
     function deleteRow(groupid){
 		if(jQuery('#indexnum'+groupid).val()>0){
 			try{
