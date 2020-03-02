@@ -141,6 +141,7 @@ public class Fqydkhlc extends BaseCronJob {
 					+"LFDAT,"//	交货日期
 					+"TEXT_LINE,"//	备注
 					+"gysHzqr,"//	供应商或债权人的帐号
+                    +"IM_FLAG,"//	成本中心是否必填
 					+"BNFPO,"//	行项目号
 					+"cjrq,"//	创建日期"
 					+"ly"//	来源"
@@ -172,6 +173,7 @@ public class Fqydkhlc extends BaseCronJob {
 					+Util.null2String(rs.getString("LFDAT"))+"','"//	交货日期
 					+Util.null2String(rs.getString("TEXT_LINE").replaceAll("'","''"))+"','"//	备注
 					+Util.null2String(rs.getString("gysHzqr"))+"','"//	供应商或债权人的帐号
+					+Util.null2String(rs.getString("IM_FLAG"))+"','"//	成本中心是否必填
 					+i+"','"//	行项目号
 					+Util.null2String(rs.getString("cjrq"))+"','" //	创建日期
 					+Util.null2String(rs.getString("lcbh")+"-"+rs.getString("BNFPO"))+ //	创建日期
