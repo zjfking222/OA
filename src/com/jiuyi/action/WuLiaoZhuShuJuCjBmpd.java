@@ -67,6 +67,8 @@ public class WuLiaoZhuShuJuCjBmpd  extends BaseAction implements Action {
 				
 				Object E_FLAG = outpar.getValue("E_FLAG");//获取输出参数
 				new BaseBean().writeLog("E_FLAG=="+E_FLAG);
+                Object  E_WERKS=outpar.getValue("E_WERKS");//重复工厂
+                new BaseBean().writeLog("E_WERKS"+E_WERKS);
 				
 				if(E_FLAG.equals("1")){
 					requestInfo.getRequestManager().setMessage("111100");//
@@ -74,7 +76,7 @@ public class WuLiaoZhuShuJuCjBmpd  extends BaseAction implements Action {
 					return "0";
 				}else if(E_FLAG.equals("2")){
 					requestInfo.getRequestManager().setMessage("111100");//
-					requestInfo.getRequestManager().setMessagecontent("提交失败:"+MAKTX+"此物料已存在，请更换");
+                    requestInfo.getRequestManager().setMessagecontent("提交失败:"+MAKTX+"此物料在"+E_WERKS+"已存在，请更换");
 					return "0";
 				}
 			}
