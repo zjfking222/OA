@@ -393,7 +393,7 @@ public class WuLiaoZhuShuJuXiuGai extends BaseAction implements Action{
 					new BaseBean().writeLog("WRKST1="+WRKST1);
 					
 					String sql2 = "update "+tablename+"_dt1  set MLAST="+MLAST1+",TAXM1="+TAXM11+",MATNR='"+MATNR+
-                            "',MTART="+MTART1+",WRKST='"+WRKST1+"',SPART="+SPART+",VKORG='"+VKORG+"',VTWEG='"+VTWEG+
+                            "',MTART="+MTART1+",WRKST='"+WRKST1+"',SPART='"+SPART+"',VKORG='"+VKORG+"',VTWEG='"+VTWEG+
                             "',DWERK='"+DWERK+"',KTGRM='"+KTGRM+"',KONDM="+KONDM1+",XCHPF=1,DISMM='"+DISMM+"',DISPO='"+DISPO+
                             "',DISLS='"+DISLS+"',BESKZ="+BESKZ1+",LGPRO='"+LGPRO+"',LGFSB='"+LGFSB+"',FHORI="+FHORI1+
                             ",LGPBE='"+LGPBE+"',IPRKZ="+IPRKZ1+",MHDHB="+MHDHB+",MHDRZ="+MHDRZ+",QMPUR="+QMPUR1+
