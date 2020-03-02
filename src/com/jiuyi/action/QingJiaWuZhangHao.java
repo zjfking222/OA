@@ -100,16 +100,24 @@ public class QingJiaWuZhangHao extends BaseAction implements Action{
 			String nianxjde=outpar.getString("E_ANZHL");//年休假定额
 			String shengyxss=outpar.getString("E_QTNEG");//剩余小时数
 			String txjde=outpar.getString("E_ANZHL_TIAO");//调休假定额
+			String sjts=outpar.getString("E_ZABSJ");//事假天数
+			String bjts=outpar.getString("E_ZABBJ");//病假天数
+			String gsjts=outpar.getString("E_ZABGSJ");//工伤假天数
+			String jxdj=outpar.getString("E_JXDJ");//绩效等级
 			
 			
 			new  BaseBean().writeLog("时数~"+shis);
 			new  BaseBean().writeLog("年休假定额~"+nianxjde);
 			new  BaseBean().writeLog("剩余小时数~"+shengyxss);
 			new  BaseBean().writeLog("调休假定额~"+txjde);
+			new  BaseBean().writeLog("事假天数~"+sjts);
+			new  BaseBean().writeLog("病假天数~"+bjts);
+			new  BaseBean().writeLog("工伤假天数~"+gsjts);
+			new BaseBean().writeLog("绩效等级~"+jxdj);
 			
-			String sql2="update "+tablename+"_dt1 set shis="+shis+",nianxjde="+nianxjde+",shengyxss="+shengyxss+",txjde="+txjde+" where kaissj='"+h_kssj+"' and kaisrq='"+h_ksrq+"' and yuangbh='"+h_yuangbh+"' and mainid="+mianid;
+			String sql2="update "+tablename+"_dt1 set shis="+shis+",nianxjde="+nianxjde+",shengyxss="+shengyxss+",txjde="+txjde+",sj="+sjts+",bj="+bjts+",gsj="+gsjts+",jxdj='"+jxdj+"' where kaissj='"+h_kssj+"' and kaisrq='"+h_ksrq+"' and yuangbh='"+h_yuangbh+"' and mainid="+mianid;
 			new BaseBean().writeLog("sql2=="+sql2);
-			rs2.executeSql(sql2);
+			rs2.execute(sql2);
 			
 			if(Double.parseDouble(shengyxss)<=0&&h_leix.equals("4")){
 				requestInfo.getRequestManager().setMessage("111100");//
