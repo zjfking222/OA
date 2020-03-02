@@ -627,6 +627,16 @@ public class TransUtil {
 		String name=JiuyiUtil.getSelectname(value,"9309");
 		return name;
 	}
+
+	/**
+	 * 零供应商主数据 银行国家代码（下拉框）转换 测试机
+	 * @param value
+	 * @return name
+	 */
+	public static String getGysZsjGjDmcs(String value){
+		String name=JiuyiUtil.getSelectname(value,"16896");
+		return name;
+	}
 	
 	/**
 	 * 零供应商主数据 银行代码（下拉框）转换
