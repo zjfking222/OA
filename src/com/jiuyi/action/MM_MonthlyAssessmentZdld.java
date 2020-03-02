@@ -21,10 +21,11 @@ public class MM_MonthlyAssessmentZdld implements Action {
 		String sql = "select * from "+tablename+" where requestid = "+requestid;
 		rs.executeSql(sql);
 		rs.next();
-		//mainid
-		String mainid = rs.getString("id");
+
+		String mainid = rs.getString("id");//mainid
+		String WERKS1=rs.getString("WERKS1");//客户所选择的工厂的id
 		new BaseBean().writeLog("mainid-----"+mainid);
-		//客户所选择的工厂的id
+
 		String BSART1 = rs.getString("BSART1");//月度采购申请凭证类型
 		String BSART2= rs.getString("BSART2");//零星采购申请凭证类型
 		String BSART = rs.getString("BSART");//采购申请凭证类型号
@@ -89,31 +90,41 @@ public class MM_MonthlyAssessmentZdld implements Action {
 		
 		
 		
-		if("xmydpg".equals(lcbm)){//国内月度评估
+		if("xmydpg".equals(lcbm)){//国内月度评估，,IM_FLAG=1成本中心必填
 		if("3".equals(BSART1)) {
-			sql = "update "+tablename+"_dt1 set KOSTL = '"+KOSTL1+"', MCTXT = '"+cbzxms+"', KNTTP='K',AFNAM='"+cbzxms+shenqrxm+"'  where mainid = "+mainid;
+			sql = "update "+tablename+"_dt1 set KOSTL = '"+KOSTL1+"', MCTXT = '"+cbzxms+"', KNTTP='K',AFNAM='"+cbzxms+shenqrxm+"' where mainid = "+mainid;
 			new BaseBean().writeLog("sql1-----"+sql);
 		}else {
 			sql = "update "+tablename+"_dt1 set KOSTL = '' ,MCTXT = '"+cbzxms+"',KNTTP='',AFNAM='"+cbzxms+shenqrxm+"'  where mainid = "+mainid;
 			new BaseBean().writeLog("sql2-----"+sql);
 		}
-		rs.executeSql(sql);
+
+		rs.execute(sql);
 		sql = "update "+tablename+" set xqzxm='"+cbzxms+shenqrxm+"' where requestid="+requestid;
-		rs.executeSql(sql);
+		rs.execute(sql);
+		if (WERKS1.equals("3020")){
+		    sql = "update "+tablename+"_dt1 set KOSTL = '"+KOSTL1+"', IM_FLAG=1  where mainid = "+mainid;
+		    new BaseBean().writeLog("sql3-----"+sql);
+		    rs.execute(sql);
+		}
 		
 		
 		}else if("scjylx".equals(lcbm)) {//生产经营零星材料需求
 			if("3".equals(BSART2)) {
-				sql = "update "+tablename+"_dt1 set KOSTL = '"+KOSTL1+"',MCTXT='"+cbzxms+"', KNTTP='K',AFNAM='"+cbzxms+shenqrxm+"',AUFNR='"+dd+"'  where mainid = "+mainid;
+				sql = "update "+tablename+"_dt1 set KOSTL = '"+KOSTL1+"',MCTXT='"+cbzxms+"', KNTTP='K',AFNAM='"+cbzxms+shenqrxm+"',AUFNR='"+dd+"' where mainid = "+mainid;
 				new BaseBean().writeLog("sql3-----"+sql);
 			}else {
 				sql = "update "+tablename+"_dt1 set KOSTL = '',MCTXT='"+cbzxms+"', KNTTP='',AFNAM='"+cbzxms+shenqrxm+"',AUFNR=''  where mainid = "+mainid;
 				new BaseBean().writeLog("sql4-----"+sql);
 			}
-			rs.executeSql(sql);
+			rs.execute(sql);
 			sql = "update "+tablename+" set xqzxm='"+cbzxms+shenqrxm+"' where requestid="+requestid;
-			rs.executeSql(sql);
-			
+			rs.execute(sql);
+            if (WERKS1.equals("3020")){
+				sql = "update "+tablename+"_dt1 set KOSTL = '"+KOSTL1+"', IM_FLAG=1  where mainid = "+mainid;
+                new BaseBean().writeLog("sql3-----"+sql);
+                rs.execute(sql);
+            }
 			
 		}else if("xmlxcl".equals(lcbm)) {//项目零星材料需求
 			if("3".equals(BSART2)) {
